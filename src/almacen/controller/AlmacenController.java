@@ -12,7 +12,6 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import almacen.aplication.Aplicacion;
 import almacen.model.Almacen;
 import almacen.model.Cliente;
@@ -32,14 +31,13 @@ public class AlmacenController implements Initializable {
 
     private Aplicacion aplicacion;
     private Almacen almacen;
+    ObservableList<Cliente> listaClientes = FXCollections.observableArrayList();
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
-        listaClientes = FXCollections.observableArrayList();
 
 
         this.columnNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
@@ -53,7 +51,17 @@ public class AlmacenController implements Initializable {
     public void setAplicacion(Aplicacion aplicacion) {
         this.aplicacion = aplicacion;
         this.almacen = aplicacion.getAlmacen();
+
+        tableViewClientes.getItems().clear();
+        tableViewClientes.setItems(getClientes());
+        
     }
+
+    private ObservableList<Cliente> getClientes() {
+        listaClientes.addAll(almacen.getClientes());
+        return listaClientes;
+    }
+
     @FXML
     private Button btnActualizarCliente;
 
@@ -117,10 +125,6 @@ public class AlmacenController implements Initializable {
 
     @FXML
     private TextField txtValorProducto;
-
-    private ObservableList<Cliente> listaClientes;
-
-
 
     @FXML
     private TextField txtidTributaria;
