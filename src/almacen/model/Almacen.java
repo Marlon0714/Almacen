@@ -14,6 +14,15 @@ public class Almacen {
     public Almacen(String nombre, String nit) {
         this.nombre = nombre;
         this.nit = nit;
+        //Crear tres clientes
+        Cliente cliente1 = new Cliente("Juan", "Perez", "12345678", "Calle 1", 12345678);
+        Cliente cliente2 = new Cliente("Pedro", "Gomez", "87654321", "Calle 2", 87654321);
+        Cliente cliente3 = new Cliente("Maria", "Lopez", "98765432", "Calle 3", 98765432);
+        //Agregar clientes al almacen
+        clientes.add(cliente1);
+        clientes.add(cliente2);
+        clientes.add(cliente3);
+
     }
 
     public String getNombre() {
