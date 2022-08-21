@@ -1,14 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMain.java to edit this template
- */
+
 package almacen.aplication;
 
+import almacen.controller.AlmacenController;
+import almacen.model.Almacen;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -19,17 +20,51 @@ import javafx.stage.Stage;
 public class Aplicacion extends Application {
     
 	private Stage primaryStage;
+    private Almacen almacen;
+        
 
 	@Override
 	public void start (Stage primaryStage) throws Exception {
 		
             this.primaryStage = primaryStage;
-		
+            this.primaryStage.setTitle("Almacen");
+            mostrarVentanaPrincipal();
 	}
     
-    /**
-     * @param args the command line arguments
-     */
+    public void mostrarVentanaPrincipal(){
+
+        try{
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Aplicacion.class.getResource("/almacen/view/AlmacenView.fxml"));
+            AnchorPane root = (AnchorPane) loader.load();
+
+            AlmacenController almacenController = loader.getController();
+            almacenController.setAplicacion(this);
+
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
+
+    public void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+    }
+
+    public void setAlmacen(Almacen almacen) {
+        this.almacen = almacen;
+    }
+
+    public Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    public Almacen getAlmacen() {
+        return almacen;
+    }
     public static void main(String[] args) {
         launch(args);
     }
