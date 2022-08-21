@@ -14,54 +14,56 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="533.0" prefWidth="601.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18" fx:controller="almacen.controller.AlmacenController">
+<AnchorPane id="AnchorPane" prefHeight="564.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="almacen.controller.AlmacenController">
    <children>
-      <TabPane layoutY="45.0" prefHeight="488.0" prefWidth="601.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutY="45.0" prefHeight="518.0" prefWidth="601.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Clientes">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <SplitPane dividerPositions="0.5601750547045952, 0.5733041575492341" orientation="VERTICAL" prefHeight="459.0" prefWidth="601.0">
+                        <SplitPane dividerPositions="0.5273522975929978" orientation="VERTICAL" prefHeight="459.0" prefWidth="601.0">
                           <items>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="216.0" prefWidth="599.0">
                                  <children>
                                     <Label layoutX="14.0" layoutY="6.0" text="Información del Cliente" />
                                     <Separator layoutY="26.0" prefHeight="0.0" prefWidth="601.0" />
-                                    <TextField layoutX="14.0" layoutY="41.0" promptText="Nombre(s)" />
-                                    <TextField layoutX="14.0" layoutY="119.0" promptText="Identificación" />
-                                    <TextField layoutX="14.0" layoutY="79.0" promptText="Apellidos" />
-                                    <TextField layoutX="14.0" layoutY="162.0" promptText="Teléfono" />
-                                    <BottomNavigationButton layoutX="14.0" layoutY="214.0" prefHeight="25.0" prefWidth="80.0" text="Nuevo" />
-                                    <MenuButton layoutX="354.0" layoutY="41.0" mnemonicParsing="false" text="Tipo de Persona">
+                                    <TextField layoutX="14.0" layoutY="41.0" prefHeight="25.0" prefWidth="204.0" promptText="Nombre(s)" />
+                                    <TextField layoutX="14.0" layoutY="83.0" prefHeight="25.0" prefWidth="204.0" promptText="Identificación" />
+                                    <TextField layoutX="319.0" layoutY="41.0" prefHeight="25.0" prefWidth="228.0" promptText="Apellidos" />
+                                    <TextField layoutX="13.0" layoutY="129.0" prefHeight="25.0" prefWidth="156.0" promptText="Teléfono" />
+                                    <BottomNavigationButton layoutX="14.0" layoutY="202.0" prefHeight="25.0" prefWidth="80.0" text="Nuevo" />
+                                    <MenuButton layoutX="319.0" layoutY="83.0" mnemonicParsing="false" text="Tipo de Persona">
                                       <items>
                                         <MenuItem mnemonicParsing="false" text="Persona Natural" />
                                         <MenuItem mnemonicParsing="false" text="Persona Jurídica" />
                                       </items>
                                     </MenuButton>
-                                    <Separator layoutX="-1.0" layoutY="198.0" prefHeight="0.0" prefWidth="601.0" />
-                                    <BottomNavigationButton layoutX="239.0" layoutY="214.0" prefHeight="25.0" prefWidth="80.0" text="Actualizar" />
-                                    <BottomNavigationButton layoutX="460.0" layoutY="214.0" prefHeight="25.0" prefWidth="80.0" text="Agregar" />
+                                    <Separator layoutX="-1.0" layoutY="190.0" prefHeight="0.0" prefWidth="601.0" />
+                                    <BottomNavigationButton layoutX="239.0" layoutY="202.0" prefHeight="25.0" prefWidth="80.0" text="Actualizar" />
+                                    <BottomNavigationButton layoutX="461.0" layoutY="202.0" prefHeight="25.0" prefWidth="80.0" text="Agregar" />
                                  </children>
                               </AnchorPane>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="179.0" prefWidth="599.0">
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="195.0" prefWidth="599.0">
                                  <children>
                                     <Label layoutX="14.0" layoutY="6.0" prefHeight="17.0" prefWidth="116.0" text="Lista  de Clientes" />
                                     <Separator layoutY="26.0" prefHeight="0.0" prefWidth="601.0" />
-                                    <TableView layoutY="32.0" prefHeight="129.0" prefWidth="601.0">
+                                    <TableView layoutY="27.0" prefHeight="185.0" prefWidth="601.0">
                                       <columns>
-                                        <TableColumn prefWidth="213.0" text="Nombre(s)" />
-                                        <TableColumn prefWidth="240.0" text="Apellidos" />
-                                          <TableColumn prefWidth="98.0" text="Teléfono" />
+                                        <TableColumn prefWidth="137.0" text="Nombre(s)" />
+                                        <TableColumn prefWidth="150.0" text="Apellidos" />
+                                          <TableColumn prefWidth="144.0" text="Teléfono" />
+                                          <TableColumn prefWidth="75.0" text="Column X" />
+                                          <TableColumn prefWidth="118.0" text="Column X" />
+                                          <TableColumn prefWidth="75.0" text="Column X" />
+                                          <TableColumn prefWidth="75.0" text="Column X" />
                                       </columns>
                                     </TableView>
-                                    <Button layoutX="25.0" layoutY="165.0" mnemonicParsing="false" text="Eliminar" />
                                  </children>
                               </AnchorPane>
                           </items>
                         </SplitPane>
+                        <Button layoutX="11.0" layoutY="462.0" mnemonicParsing="false" text="Eliminar" />
                      </children>
                   </AnchorPane>
             </content>
@@ -72,10 +74,44 @@
                      <children>
                         <SplitPane dividerPositions="0.5" layoutX="-1.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="461.0" prefWidth="601.0">
                           <items>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                 <children>
+                                    <Separator layoutX="3.0" layoutY="29.0" prefHeight="0.0" prefWidth="593.0" />
+                                    <Label layoutX="14.0" layoutY="6.0" text="Información del producto" />
+                                    <TextField layoutX="14.0" layoutY="45.0" promptText="Nombre del Producto" />
+                                    <TextField layoutX="14.0" layoutY="188.0" promptText="Cantidad en existencia" />
+                                    <TextField layoutX="14.0" layoutY="150.0" promptText="Valor Unitario" />
+                                    <TextField layoutX="14.0" layoutY="114.0" promptText="Descripición" />
+                                    <TextField layoutX="14.0" layoutY="80.0" promptText="Código" />
+                                    <MenuButton layoutX="206.0" layoutY="45.0" mnemonicParsing="false" text="Tipo de Producto">
+                                      <items>
+                                        <MenuItem mnemonicParsing="false" text="Perecedero" />
+                                        <MenuItem mnemonicParsing="false" text="Refrigerado" />
+                                          <MenuItem mnemonicParsing="false" text="Envasado" />
+                                      </items>
+                                    </MenuButton>
+                                    <Button layoutX="494.0" layoutY="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Nuevo" />
+                                    <Button layoutX="495.0" layoutY="101.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="74.0" text="Actualizar" />
+                                    <Button layoutX="496.0" layoutY="163.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="74.0" text="Agregar" />
+                                    <Separator layoutX="447.0" layoutY="31.0" orientation="VERTICAL" prefHeight="196.0" prefWidth="5.0" />
+                                 </children></AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="599.0">
+                                 <children>
+                                    <Label layoutX="14.0" layoutY="6.0" text="Lista Productos" />
+                                    <Separator layoutX="-1.0" layoutY="23.0" prefHeight="6.0" prefWidth="601.0" />
+                                    <TableView layoutX="-1.0" layoutY="26.0" prefHeight="197.0" prefWidth="601.0">
+                                      <columns>
+                                        <TableColumn prefWidth="129.0" text="Nombre Producto" />
+                                        <TableColumn prefWidth="89.0" text="Código" />
+                                          <TableColumn prefWidth="132.0" text="Descripción" />
+                                          <TableColumn prefWidth="146.0" text="Valor Unitario" />
+                                          <TableColumn prefWidth="101.0" text="Existencias" />
+                                      </columns>
+                                    </TableView>
+                                 </children></AnchorPane>
                           </items>
                         </SplitPane>
+                        <Button layoutX="14.0" layoutY="463.0" mnemonicParsing="false" text="Eliminar" />
                      </children>
                   </AnchorPane>
             </content>
