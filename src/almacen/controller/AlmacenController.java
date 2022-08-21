@@ -8,9 +8,12 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import almacen.aplication.Aplicacion;
 import almacen.model.Almacen;
 import almacen.model.Cliente;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -32,13 +35,18 @@ public class AlmacenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        listaClientes = FXCollections.observableArrayList();
+
+
+        this.columnNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        this.columnApellido.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
+        this.columnTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
     }
 
     public void setAplicacion(Aplicacion aplicacion) {
         this.aplicacion = aplicacion;
         this.almacen = aplicacion.getAlmacen();
     }
-    
     @FXML
     private Button btnActualizarCliente;
 
@@ -64,13 +72,16 @@ public class AlmacenController implements Initializable {
     private Button btnNuevoProducto;
 
     @FXML
+    private TableColumn<Cliente, String>columnNombre;
+
+    @FXML
     private TableColumn<Cliente, String> columnApellido;
 
     @FXML
     private TableColumn<Cliente, String> columnTelefono;
 
     @FXML
-    private TableView<?> tableViewClientes;
+    private TableView<Cliente> tableViewClientes;
 
     @FXML
     private TextField txtApellidoCliente;
@@ -99,6 +110,10 @@ public class AlmacenController implements Initializable {
     @FXML
     private TextField txtValorProducto;
 
+    private ObservableList<Cliente> listaClientes;
+
+
+
     @FXML
     void actualizarCliente(ActionEvent event) {
 
@@ -111,16 +126,23 @@ public class AlmacenController implements Initializable {
 
     @FXML
     void agregarCliente(ActionEvent event) {
+        String nombre = txtNombreCliente.getText();
+        String apellidos = txtApellidoCliente.getText();
+        int telefono = Integer.parseInt(this.txtTelefono.getText());
+        int idCliente = Integer.parseInt(this.txtCedula.getText());
+        String direccion = txtDescripcionProducto.getText();
+
+        Cliente c = new Cliente(nombre, apellidos, idCliente, direccion, telefono);
+
+        if (!this.listaClientes.contains(c)) {
+            this.listaClientes.add(c);
+            this.tableViewClientes.setItems(listaClientes);
+        }
 
     }
 
     @FXML
     void agregarProducto(ActionEvent event) {
-
-    }
-
-    @FXML
-    void columnNombre(ActionEvent event) {
 
     }
 
@@ -134,4 +156,5 @@ public class AlmacenController implements Initializable {
 
     }
     
+
 }
