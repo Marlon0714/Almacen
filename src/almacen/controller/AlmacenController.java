@@ -88,7 +88,7 @@ public class AlmacenController implements Initializable {
     private TextField txtApellidoCliente;
 
     @FXML
-    private TextField txtcedula;
+    private TextField txtCedula;
 
     @FXML
     private TextField txtCodigoProducto;
@@ -194,7 +194,7 @@ public class AlmacenController implements Initializable {
         String nombre = txtNombreCliente.getText();
         String apellido = txtApellidoCliente.getText();
         String telefono = txtTelefono.getText();
-        int cedula = Integer.parseInt(txtcedula.getText());
+        int cedula = Integer.parseInt(txtCedula.getText());
 
         
     }
