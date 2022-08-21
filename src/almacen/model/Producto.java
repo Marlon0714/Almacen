@@ -3,22 +3,22 @@ package almacen.model;
 
 public class Producto {
     
-    private int codigo;
+    private int codigoProducto;
     private String nombre;
     private String descripcion;
     private double valorUnitario;
     private int existente;
 
-    public Producto(int codigo, String nombre, String descripcion, double valorUnitario, int existente) {
-        this.codigo = codigo;
+    public Producto(int codigoProducto, String nombre, String descripcion, double valorUnitario, int existente) {
+        this.codigoProducto = codigoProducto;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.valorUnitario = valorUnitario;
         this.existente = existente;
     }
 
-    public int getCodigo() {
-        return codigo;
+    public int getCodigoProducto() {
+        return codigoProducto;
     }
 
     public String getNombre() {
@@ -37,8 +37,8 @@ public class Producto {
         return existente;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setCodigoProducto(int codigoProducto) {
+        this.codigoProducto = codigoProducto;
     }
 
     public void setNombre(String nombre) {

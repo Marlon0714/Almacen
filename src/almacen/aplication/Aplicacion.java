@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 public class Aplicacion extends Application {
     
 	private Stage primaryStage;
-    private Almacen almacen;
+        private Almacen almacen;
         
 
 	@Override
