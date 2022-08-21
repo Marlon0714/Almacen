@@ -6,8 +6,8 @@ public class PersonaJuridica extends Cliente {
     private int idTributaria;
     private int nit;
 
-    public PersonaJuridica(int idTributaria, int nit, String nombre, String apellidos, int idCliente, String direccion, int telefono) {
-        super(nombre, apellidos, idCliente, direccion, telefono);
+    public PersonaJuridica(int idTributaria, int nit, String nombre, String apellidos, String cedula, String direccion, int telefono) {
+        super(nombre, apellidos, cedula, direccion, telefono);
         this.idTributaria = idTributaria;
         this.nit = nit;
     }
