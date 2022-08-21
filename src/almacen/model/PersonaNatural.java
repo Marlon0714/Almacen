@@ -9,8 +9,8 @@ public class PersonaNatural extends Cliente{
     private String email;
     private Date fechaNacimiento;
 
-    public PersonaNatural(String email, Date fechaNacimiento, String nombre, String apellidos, int idCliente, String direccion, int telefono) {
-        super(nombre, apellidos, idCliente, direccion, telefono);
+    public PersonaNatural(String email, Date fechaNacimiento, String nombre, String apellidos, String cedula, String direccion, int telefono) {
+        super(nombre, apellidos, cedula, direccion, telefono);
         this.email = email;
         this.fechaNacimiento = fechaNacimiento;
     }

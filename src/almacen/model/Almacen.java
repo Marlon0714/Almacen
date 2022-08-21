@@ -6,12 +6,12 @@ import java.util.ArrayList;
 public class Almacen {
     
     private String nombre;
-    private int nit;
+    private String nit;
     private ArrayList<Cliente> clientes = new ArrayList<>();
     private ArrayList<Producto> productos = new ArrayList<>();
     private ArrayList<Factura> facturas = new ArrayList<>();
 
-    public Almacen(String nombre, int nit) {
+    public Almacen(String nombre, String nit) {
         this.nombre = nombre;
         this.nit = nit;
     }
@@ -20,7 +20,7 @@ public class Almacen {
         return nombre;
     }
 
-    public int getNit() {
+    public String getNit() {
         return nit;
     }
 
@@ -28,7 +28,7 @@ public class Almacen {
         this.nombre = nombre;
     }
 
-    public void setNit(int nit) {
+    public void setNit(String nit) {
         this.nit = nit;
     }
 

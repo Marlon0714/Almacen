@@ -4,14 +4,14 @@ package almacen.model;
 public class Cliente {
     private String nombre;
     private String apellidos;
-    private int idCliente;
+    private String cedula;
     private String direccion;
     private int telefono;
 
-    public Cliente(String nombre, String apellidos, int idCliente, String direccion, int telefono) {
+    public Cliente(String nombre, String apellidos, String cedula, String direccion, int telefono) {
         this.nombre = nombre;
         this.apellidos = apellidos;
-        this.idCliente = idCliente;
+        this.cedula = cedula;
         this.direccion = direccion;
         this.telefono = telefono;
     }
@@ -24,8 +24,8 @@ public class Cliente {
         return apellidos;
     }
 
-    public int getIdCliente() {
-        return idCliente;
+    public String getcedula() {
+        return cedula;
     }
 
     public String getDireccion() {
@@ -44,8 +44,8 @@ public class Cliente {
         this.apellidos = apellidos;
     }
 
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
+    public void setcedula(String cedula) {
+        this.cedula = cedula;
     }
 
     public void setDireccion(String direccion) {
