@@ -24,7 +24,7 @@ public class Cliente {
         return apellidos;
     }
 
-    public String getcedula() {
+    public String getCedula() {
         return cedula;
     }
 
@@ -44,7 +44,7 @@ public class Cliente {
         this.apellidos = apellidos;
     }
 
-    public void setcedula(String cedula) {
+    public void setCedula(String cedula) {
         this.cedula = cedula;
     }
 

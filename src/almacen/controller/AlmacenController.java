@@ -58,10 +58,6 @@ public class AlmacenController implements Initializable {
             clienteSeleccion = newSelection;
         }
         });
- 
-        //this.columnNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-        //this.columnApellido.setCellValueFactory(new PropertyValueFactory<>("apellido"));
-        //this.columnTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
 
 
     }
@@ -299,7 +295,7 @@ public class AlmacenController implements Initializable {
     void eliminarCliente(ActionEvent event) {
         if(clienteSeleccion != null){
             listaClientes.remove(clienteSeleccion);
-            if(aplicacion.eliminarCliente(clienteSeleccion.getcedula())){
+            if(aplicacion.eliminarCliente(clienteSeleccion.getCedula())){
                 mostrarMensaje("Notificación","El cliente no se ha eliminado","El cliente no se pudo eliminar correctamente");
             }
             else{

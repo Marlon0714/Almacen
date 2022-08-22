@@ -87,7 +87,7 @@ public class Almacen {
         boolean flagEliminado = false;
         do {
             for (int i = 0; i < clientes.size(); i++) {
-                if (clientes.get(i).getcedula().equals(cedula)) {
+                if (clientes.get(i).getCedula().equals(cedula)) {
                     clientes.remove(i);
                     flagEliminado = true;
 

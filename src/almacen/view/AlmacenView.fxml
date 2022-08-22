@@ -57,10 +57,10 @@
                                     <Separator layoutY="26.0" prefHeight="0.0" prefWidth="601.0" />
                                     <TableView fx:id="tableViewClientes" layoutY="27.0" prefHeight="185.0" prefWidth="601.0">
                                       <columns>
+                                          <TableColumn fx:id="columnId" prefWidth="110.0" text="Cedula" />
                                         <TableColumn fx:id="columnNombre" prefWidth="137.0" text="Nombre(s)" />
                                         <TableColumn fx:id="columnApellido" prefWidth="150.0" text="Apellidos" />
                                           <TableColumn fx:id="columnTelefono" prefWidth="144.0" text="Teléfono" />
-                                          <TableColumn fx:id="columnId" prefWidth="110.0" text="Identificación" />
                                           <TableColumn fx:id="columnDireccion" prefWidth="83.0" text="Dirección" />
                                       </columns>
                                     </TableView>
