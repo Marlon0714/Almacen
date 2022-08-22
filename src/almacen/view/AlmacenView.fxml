@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -13,6 +14,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
 <AnchorPane id="AnchorPane" prefHeight="564.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="almacen.controller.AlmacenController">
    <children>
@@ -133,6 +135,141 @@
                   </AnchorPane>
             </content>
           </Tab>
+            <Tab text="Compras">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <SplitPane dividerPositions="0.5765217391304348" layoutX="-1.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="461.0" prefWidth="601.0">
+                           <items>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                 <children>
+                                    <Separator layoutX="3.0" layoutY="29.0" prefHeight="0.0" prefWidth="593.0" />
+                                    <Label layoutX="14.0" layoutY="6.0" prefHeight="18.0" prefWidth="146.0" text="Información de la Factura" />
+                                    <TextField disable="true" layoutX="67.0" layoutY="42.0" />
+                                    <TextField disable="true" layoutX="67.0" layoutY="112.0" />
+                                    <TextField disable="true" layoutX="67.0" layoutY="76.0" />
+                                    <Button layoutX="15.0" layoutY="229.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Facturar" />
+                                    <Separator layoutX="260.0" layoutY="29.0" orientation="VERTICAL" prefHeight="225.0" prefWidth="0.0" />
+                                    <DatePicker fx:id="dateFechaVencimiento1" layoutX="206.0" layoutY="80.0" promptText="Fecha de Vencimiento" visible="false" />
+                                    <DatePicker fx:id="dateFechaEnvasado1" layoutX="206.0" layoutY="80.0" promptText="Fecha de Envasado" visible="false" />
+                                    <TextField fx:id="txtCodigoAprobacion1" layoutX="206.0" layoutY="80.0" prefHeight="26.0" prefWidth="170.0" promptText="Codigo de Aprobacion" visible="false" />
+                                    <TextField fx:id="txtTemperaturaRecomendada1" layoutX="206.0" layoutY="116.0" prefHeight="26.0" prefWidth="170.0" promptText="Temperatura Recomendada" visible="false" />
+                                    <TextField fx:id="txtPesoEnvase1" layoutX="206.0" layoutY="116.0" prefHeight="26.0" prefWidth="150.0" promptText="Peso del Envase" visible="false" />
+                                    <MenuButton fx:id="mnBtnPaisOrigen1" layoutX="206.0" layoutY="150.0" mnemonicParsing="false" text="Pais de Origen" visible="false">
+                                       <items>
+                                          <MenuItem fx:id="itemColombia1" mnemonicParsing="false" onAction="#selectColombia" text="Colombia" />
+                                          <MenuItem fx:id="itemArgentina1" mnemonicParsing="false" onAction="#selectArgentina" text="Argentina" />
+                                          <MenuItem fx:id="itemChile1" mnemonicParsing="false" onAction="#selectChile" text="Chile" />
+                                          <MenuItem fx:id="itemEcuador1" mnemonicParsing="false" onAction="#selectEcuador" text="Ecuador" />
+                                          <MenuItem fx:id="itemPeru1" mnemonicParsing="false" onAction="#selectPeru" text="Peru" />
+                                       </items>
+                                    </MenuButton>
+                                    <Label layoutX="13.0" layoutY="45.0" text="Codigo" />
+                                    <Label layoutX="14.0" layoutY="80.0" text="Fecha" />
+                                    <Label layoutX="15.0" layoutY="115.0" text="Cliente" />
+                                    <Separator layoutX="263.0" layoutY="10.0" prefHeight="203.0" prefWidth="334.0" />
+                                    <Label layoutX="271.0" layoutY="36.0" prefHeight="18.0" prefWidth="146.0" text="Establecer Cliente" />
+                                    <TextField layoutX="273.0" layoutY="67.0" prefHeight="26.0" prefWidth="142.0" promptText="Cedula" />
+                                    <Button layoutX="458.0" layoutY="67.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="96.0" text="Buscar" />
+                                    <Label layoutX="271.0" layoutY="128.0" prefHeight="18.0" prefWidth="146.0" text="Agregar Venta" />
+                                    <TextField layoutX="273.0" layoutY="162.0" prefHeight="26.0" prefWidth="142.0" promptText="Codigo del Producto" />
+                                    <TextField layoutX="273.0" layoutY="207.0" prefHeight="26.0" prefWidth="142.0" promptText="Cantidad" />
+                                    <Button layoutX="458.0" layoutY="184.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="96.0" text="Agregar" />
+                                    <Label layoutX="22.0" layoutY="154.0" text="Iva" />
+                                    <TextField disable="true" layoutX="67.0" layoutY="150.0" />
+                                    <Label layoutX="20.0" layoutY="189.0" text="Total" />
+                                    <TextField disable="true" layoutX="67.0" layoutY="185.0" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="71.0" prefWidth="601.0">
+                                 <children>
+                                    <Label layoutX="14.0" layoutY="3.0" text="Detalles de la Factura">
+                                       <padding>
+                                          <Insets bottom="5.0" />
+                                       </padding>
+                                    </Label>
+                                    <Separator layoutX="-1.0" layoutY="23.0" prefHeight="6.0" prefWidth="601.0" />
+                                    <TableView layoutX="-1.0" layoutY="26.0" prefHeight="197.0" prefWidth="602.0">
+                                       <columns>
+                                          <TableColumn prefWidth="81.60003662109375" text="Código" />
+                                          <TableColumn prefWidth="128.79998779296875" text="Nombre del Producto" />
+                                          <TableColumn prefWidth="133.5999755859375" text="Descripcion" />
+                                          <TableColumn prefWidth="71.20001220703125" text="Cantidad" />
+                                          <TableColumn prefWidth="88.0" text="Valor Unitario" />
+                                          <TableColumn prefWidth="96.00002441406252" text="SubTotal" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
+                        <Button fx:id="btnEliminarProducto1" layoutX="14.0" layoutY="463.0" mnemonicParsing="false" onAction="#eliminarProducto" text="Eliminar" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Facturas">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <SplitPane dividerPositions="0.4819672131147541, 0.5" orientation="VERTICAL" prefHeight="489.0" prefWidth="602.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                 <children>
+                                    <SplitPane dividerPositions="0.27330226364846866" layoutX="-1.0" layoutY="-1.0" prefHeight="286.0" prefWidth="602.0">
+                                      <items>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                             <children>
+                                                <Separator layoutX="-1.0" layoutY="27.0" prefHeight="10.0" prefWidth="242.0" />
+                                                <Label layoutX="14.0" layoutY="5.0" prefHeight="18.0" prefWidth="146.0" text="Buscar Factura" />
+                                                <TextField layoutX="14.0" layoutY="49.0" prefHeight="26.0" prefWidth="142.0" promptText="Codigo de la Factura" />
+                                                <Button layoutX="14.0" layoutY="91.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="96.0" text="Buscar" />
+                                             </children>
+                                          </AnchorPane>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="242.0" prefWidth="355.0">
+                                             <children>
+                                                <Separator layoutY="26.0" prefHeight="10.0" prefWidth="434.0" />
+                                                <Label layoutX="14.0" layoutY="5.0" prefHeight="18.0" prefWidth="146.0" text="Informacion de la Factura" />
+                                                <Pane layoutY="31.0" prefHeight="209.0" prefWidth="434.0">
+                                                   <children>
+                                                      <TableView layoutX="-1.0" prefHeight="219.0" prefWidth="434.0">
+                                                         <columns>
+                                                            <TableColumn prefWidth="58.39996337890625" text="Código" />
+                                                            <TableColumn prefWidth="74.39996337890625" text="Fecha" />
+                                                            <TableColumn prefWidth="189.60003662109375" text="Cliente" />
+                                                            <TableColumn prefWidth="35.20001220703125" text="Iva" />
+                                                            <TableColumn prefWidth="77.5999755859375" text="Total" />
+                                                         </columns>
+                                                      </TableView>
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </AnchorPane>
+                                      </items>
+                                    </SplitPane>
+                                 </children>
+                              </AnchorPane>
+                              <Label prefHeight="18.0" prefWidth="146.0" text="Detalles de la Factura">
+                                 <padding>
+                                    <Insets bottom="5.0" top="5.0" />
+                                 </padding>
+                              </Label>
+                              <TableView prefHeight="214.0" prefWidth="602.0">
+                                 <columns>
+                                    <TableColumn prefWidth="81.60003662109375" text="Código" />
+                                    <TableColumn prefWidth="128.79998779296875" text="Nombre del Producto" />
+                                    <TableColumn prefWidth="133.5999755859375" text="Descripcion" />
+                                    <TableColumn prefWidth="71.20001220703125" text="Cantidad" />
+                                    <TableColumn prefWidth="88.0" text="Valor Unitario" />
+                                    <TableColumn prefWidth="96.00002441406252" text="SubTotal" />
+                                 </columns>
+                              </TableView>
+                          </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
         </tabs>
       </TabPane>
       <Label layoutX="259.0" layoutY="14.0" text="Almacen" />
