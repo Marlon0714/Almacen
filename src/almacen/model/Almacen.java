@@ -98,4 +98,7 @@ public class Almacen {
         }
     }
 
+    public void modificarCliente(String nombre2, String apellidos, String cedula, String direccion, int telefono) {
+    }
+
 }
