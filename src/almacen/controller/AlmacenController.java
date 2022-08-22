@@ -5,7 +5,11 @@
 package almacen.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javax.management.Notification;
+
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.MenuButton;
@@ -43,11 +47,25 @@ public class AlmacenController implements Initializable {
         this.columnNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         this.columnApellido.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
         this.columnTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
+        this.columnId.setCellValueFactory(new PropertyValueFactory<>("cedula"));
+        this.columnDireccion.setCellValueFactory(new PropertyValueFactory<>("direccion"));
 
+
+
+        this.tableViewClientes.setItems(listaClientes);
+        tableViewClientes.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+        if(newSelection != null){
+            clienteSeleccion = newSelection;
+        }
+        });
+ 
+        //this.columnNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        //this.columnApellido.setCellValueFactory(new PropertyValueFactory<>("apellido"));
+        //this.columnTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
 
 
     }
-
+    private Cliente clienteSeleccion;
     public void setAplicacion(Aplicacion aplicacion) {
         this.aplicacion = aplicacion;
         this.almacen = aplicacion.getAlmacen();
@@ -97,6 +115,12 @@ public class AlmacenController implements Initializable {
     private TableColumn<Cliente, String> columnTelefono;
 
     @FXML
+    private TableColumn<Cliente, String> columnId;
+
+    @FXML 
+    private TableColumn<Cliente, String> columnDireccion;
+
+    @FXML
     private TableView<Cliente> tableViewClientes;
 
     @FXML
@@ -122,6 +146,8 @@ public class AlmacenController implements Initializable {
 
     @FXML
     private TextField txtTelefono;
+
+    @FXML TextField txtDireccion;
 
     @FXML
     private TextField txtValorProducto;
@@ -210,15 +236,58 @@ public class AlmacenController implements Initializable {
         String apellidos = txtApellidoCliente.getText();
         int telefono = Integer.parseInt(this.txtTelefono.getText());
         String idCliente = txtCedula.getText();
-        String direccion = txtDescripcionProducto.getText();
+        String direccion = txtDireccion.getText();
 
-        Cliente c = new Cliente(nombre, apellidos, idCliente, direccion, telefono);
 
-        if (!this.listaClientes.contains(c)) {
-            this.listaClientes.add(c);
-            this.tableViewClientes.setItems(listaClientes);
+
+        if(datosValidos(nombre, apellidos, idCliente, direccion, telefono) == true){
+            listaClientes.add(new Cliente(nombre, apellidos, idCliente,direccion, telefono)); 
+            //Cliente c = new Cliente(nombre, apellidos, idCliente, direccion, telefono);
+             this.aplicacion.añadirCliente(nombre, apellidos, idCliente,direccion, telefono);
+        }
+    }
+    private void añadirCliente(String nombre, String apellidos, String idCliente, String direccion, int telefono) {
+        if(aplicacion.añadirCliente(nombre, apellidos, idCliente, direccion, telefono)){
+            mostrarMensaje("Notificaión","El cliente se ha añadido","El cliente se añadió correctamente");
+        };
+    }
+    private boolean datosValidos(String nombre, String apellidos, String idCliente, String direccion, int telefono) {
+        String notificacion = "";
+        if (nombre == null || nombre.equals("")) {
+            notificacion += "Nombre no puede estar vacío\n";
+            mostrarMensaje("Notificación","Error", "Informacion inválida");
+            return false;
+        }
+        if (apellidos == null || apellidos.equals("")) {
+            notificacion += "Apellido no puede estar vacío\n";
+            mostrarMensaje("Notificación","Error", "Informacion inválida");
+            return false;
+        }
+        if (idCliente == null || idCliente.equals("")) {
+            notificacion += "Cédula no puede estar vacía\n";
+            mostrarMensaje("Notificación","Error", "Informacion inválida");
+            return false;
+        }
+        if (direccion == null || direccion.equals("")) {
+            notificacion += "La dirección no puede estar vacía\n";
+            mostrarMensaje("Notificación","Error", "Informacion inválida");
+            return false;
         }
 
+        if(notificacion.equals("")){
+            mostrarMensaje("Notificacion","Clieente registrado" , "El cliente se ha registrado correctamente");
+            return true;}
+
+
+        return false;
+    }
+
+    private void mostrarMensaje(String titulo,String header,String contenido)  {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(titulo);
+        alert.setHeaderText(header);
+        alert.setContentText(contenido);
+        alert.showAndWait();
     }
 
     @FXML
@@ -228,7 +297,18 @@ public class AlmacenController implements Initializable {
 
     @FXML
     void eliminarCliente(ActionEvent event) {
-
+        if(clienteSeleccion != null){
+            listaClientes.remove(clienteSeleccion);
+            if(aplicacion.eliminarCliente(clienteSeleccion.getcedula())){
+                mostrarMensaje("Notificación","El cliente no se ha eliminado","El cliente no se pudo eliminar correctamente");
+            }
+            else{
+                mostrarMensaje("Notificación","El cliente se ha eliminado","El cliente se ha eliminado correctamente");
+            }
+        }
+        else{
+            mostrarMensaje("Notificación","Error","No se ha seleccionado ningún cliente");
+        }
     }
 
     @FXML

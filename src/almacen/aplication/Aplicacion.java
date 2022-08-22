@@ -65,8 +65,17 @@ public class Aplicacion extends Application {
     public Almacen getAlmacen() {
         return almacen;
     }
+    public boolean añadirCliente(String nombre, String apellido, String cedula, String direccion, int telefono){
+        almacen.agregarCliente(nombre, apellido, cedula, direccion, telefono);
+        return false;
+    }
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public boolean eliminarCliente(String cedula) {
+        boolean eliminarcliente = almacen.eliminarcliente(cedula);
+        return false;
     }
     
 }

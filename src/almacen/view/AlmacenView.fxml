@@ -31,7 +31,7 @@
                                     <TextField fx:id="txtNombreCliente" layoutX="14.0" layoutY="41.0" prefHeight="25.0" prefWidth="204.0" promptText="Nombre(s)" />
                                     <TextField fx:id="txtCedula" layoutX="14.0" layoutY="83.0" prefHeight="25.0" prefWidth="204.0" promptText="Identificación" />
                                     <TextField fx:id="txtApellidoCliente" layoutX="319.0" layoutY="41.0" prefHeight="25.0" prefWidth="228.0" promptText="Apellidos" />
-                                    <TextField fx:id="txtTelefono" layoutX="13.0" layoutY="129.0" prefHeight="25.0" prefWidth="156.0" promptText="Teléfono" />
+                                    <TextField fx:id="txtTelefono" layoutX="14.0" layoutY="119.0" prefHeight="25.0" prefWidth="156.0" promptText="Teléfono" />
                                     <TextField fx:id="txtEmail" layoutX="319.0" layoutY="119.0" prefHeight="25.0" prefWidth="228.0" promptText="Email" visible="false" />
                                     <MenuButton fx:id="mnBtnTipoPersona" layoutX="319.0" layoutY="83.0" mnemonicParsing="false" onAction="#selectTipoPersona" text="Tipo de Persona">
                                       <items>
@@ -46,6 +46,7 @@
                                     <TextField fx:id="txtNitCliente" layoutX="319.0" layoutY="119.0" prefHeight="25.0" prefWidth="228.0" promptText="Nit" visible="false" />
                                     <TextField fx:id="txtidTributaria" layoutX="319.0" layoutY="155.0" prefHeight="25.0" prefWidth="228.0" promptText="Identificacion Tributaria" visible="false" />
                                     <DatePicker fx:id="dateFechaNacimiento" layoutX="319.0" layoutY="155.0" prefHeight="26.0" prefWidth="158.0" promptText="Fecha de Nacimiento" visible="false" />
+                                    <TextField fx:id="txtDireccion" layoutX="14.0" layoutY="156.0" prefHeight="25.0" prefWidth="204.0" promptText="Dirección" />
                                  </children>
                               </AnchorPane>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="195.0" prefWidth="599.0">
@@ -57,10 +58,8 @@
                                         <TableColumn fx:id="columnNombre" prefWidth="137.0" text="Nombre(s)" />
                                         <TableColumn fx:id="columnApellido" prefWidth="150.0" text="Apellidos" />
                                           <TableColumn fx:id="columnTelefono" prefWidth="144.0" text="Teléfono" />
-                                          <TableColumn prefWidth="75.0" text="Column X" />
-                                          <TableColumn prefWidth="118.0" text="Column X" />
-                                          <TableColumn prefWidth="75.0" text="Column X" />
-                                          <TableColumn prefWidth="75.0" text="Column X" />
+                                          <TableColumn fx:id="columnId" prefWidth="110.0" text="Identificación" />
+                                          <TableColumn fx:id="columnDireccion" prefWidth="83.0" text="Dirección" />
                                       </columns>
                                     </TableView>
                                  </children>
