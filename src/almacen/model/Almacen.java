@@ -1,6 +1,7 @@
 
 package almacen.model;
 
+import java.util.Date;
 import java.util.ArrayList;
 
 public class Almacen {
@@ -83,6 +84,17 @@ public class Almacen {
         Cliente cliente = new Cliente(nombre, apellido, cedula, direccion, telefono);
         clientes.add(cliente);
     }
+
+    public void agregarCliente(String nombre, String apellido, String cedula, String direccion, int telefono, String email, Date fechaNacimiento) {
+        Cliente cliente = new PersonaNatural(email, fechaNacimiento, nombre, apellido, cedula, direccion, telefono);
+        clientes.add(cliente);
+    }
+
+    public void agregarCliente(String nombre, String apellido, String cedula, String direccion, int telefono, int idTributaria, int nit) {
+        Cliente cliente = new PersonaJuridica(idTributaria, nit, nombre, apellido, cedula, direccion, telefono);
+        clientes.add(cliente);
+    }
+
     public boolean eliminarcliente(String cedula){ {
         boolean flagEliminado = false;
         do {
