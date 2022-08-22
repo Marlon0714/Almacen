@@ -77,5 +77,9 @@ public class Aplicacion extends Application {
         boolean eliminarcliente = almacen.eliminarcliente(cedula);
         return false;
     }
+
+    public void actualizarCliente(String nombre, String apellidos, String cedula, String direccion, int telefono) {
+        almacen.modificarCliente(nombre,apellidos,cedula, direccion, telefono);
+    }
     
 }

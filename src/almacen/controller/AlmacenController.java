@@ -56,14 +56,25 @@ public class AlmacenController implements Initializable {
         tableViewClientes.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
         if(newSelection != null){
             clienteSeleccion = newSelection;
+            mostarInformacion();
         }
         });
- 
+
         //this.columnNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         //this.columnApellido.setCellValueFactory(new PropertyValueFactory<>("apellido"));
         //this.columnTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
 
 
+    }
+    private void mostarInformacion() {
+        if(clienteSeleccion != null){
+            txtNombreCliente.setText(clienteSeleccion.getNombre());
+            txtApellidoCliente.setText(clienteSeleccion.getApellidos());
+            txtCedula.setText(clienteSeleccion.getcedula());
+            txtTelefono.setText(Integer.toString(clienteSeleccion.getTelefono()));
+            txtDireccion.setText(clienteSeleccion.getDireccion());
+
+        }
     }
     private Cliente clienteSeleccion;
     public void setAplicacion(Aplicacion aplicacion) {
@@ -72,7 +83,7 @@ public class AlmacenController implements Initializable {
 
         tableViewClientes.getItems().clear();
         tableViewClientes.setItems(getClientes());
-        
+
     }
 
     private ObservableList<Cliente> getClientes() {
@@ -117,7 +128,7 @@ public class AlmacenController implements Initializable {
     @FXML
     private TableColumn<Cliente, String> columnId;
 
-    @FXML 
+    @FXML
     private TableColumn<Cliente, String> columnDireccion;
 
     @FXML
@@ -219,10 +230,8 @@ public class AlmacenController implements Initializable {
     private MenuButton mnBtnTipoProducto;
 
 
-    @FXML
-    void actualizarCliente(ActionEvent event) {
 
-    }
+    
 
     @FXML
     void actualizarProducto(ActionEvent event) {
@@ -235,15 +244,13 @@ public class AlmacenController implements Initializable {
         String nombre = txtNombreCliente.getText();
         String apellidos = txtApellidoCliente.getText();
         int telefono = Integer.parseInt(this.txtTelefono.getText());
-        String idCliente = txtCedula.getText();
+        String cedula = txtCedula.getText();
         String direccion = txtDireccion.getText();
 
-
-
-        if(datosValidos(nombre, apellidos, idCliente, direccion, telefono) == true){
-            listaClientes.add(new Cliente(nombre, apellidos, idCliente,direccion, telefono)); 
+        if(datosValidos(nombre, apellidos, cedula, direccion, telefono) == true){
+            listaClientes.add(new Cliente(nombre, apellidos, cedula,direccion, telefono));
             //Cliente c = new Cliente(nombre, apellidos, idCliente, direccion, telefono);
-             this.aplicacion.añadirCliente(nombre, apellidos, idCliente,direccion, telefono);
+             this.aplicacion.añadirCliente(nombre, apellidos, cedula,direccion, telefono);
         }
     }
     private void añadirCliente(String nombre, String apellidos, String idCliente, String direccion, int telefono) {
@@ -289,7 +296,29 @@ public class AlmacenController implements Initializable {
         alert.setContentText(contenido);
         alert.showAndWait();
     }
+    @FXML
+    void actualizarCliente(ActionEvent event) {
+        String nombre = txtNombreCliente.getText();
+        String apellidos = txtApellidoCliente.getText();
+        int telefono = Integer.parseInt(this.txtTelefono.getText());
+        String cedula = txtCedula.getText();
+        String direccion = txtDireccion.getText();
 
+        if(clienteSeleccion != null) {
+            if(datosValidos(nombre, apellidos, cedula, direccion, telefono) == true){
+                aplicacion.actualizarCliente(nombre, apellidos, cedula, direccion, telefono);
+                clienteSeleccion.setNombre(nombre);
+                clienteSeleccion.setApellidos(apellidos);
+                clienteSeleccion.setcedula(cedula);
+                clienteSeleccion.setDireccion(direccion);
+                clienteSeleccion.setTelefono(telefono);
+                tableViewClientes.refresh();
+            }
+
+        }else{
+            mostrarMensaje("Notificación","Error","No se ha seleccionado ningún cliente");
+        }
+    }
     @FXML
     void agregarProducto(ActionEvent event) {
 
