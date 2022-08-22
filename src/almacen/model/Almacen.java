@@ -7,7 +7,7 @@ public class Almacen {
     
     private String nombre;
     private String nit;
-    private String cedula;
+
     private ArrayList<Cliente> clientes = new ArrayList<>();
     private ArrayList<Producto> productos = new ArrayList<>();
     private ArrayList<Factura> facturas = new ArrayList<>();
@@ -15,7 +15,6 @@ public class Almacen {
     public Almacen(String nombre, String nit) {
         this.nombre = nombre;
         this.nit = nit;
-        this.cedula = cedula;
         //Crear tres clientes
         Cliente cliente1 = new Cliente("Juan", "Perez", "12345678", "Calle 1", 12345678);
         Cliente cliente2 = new Cliente("Pedro", "Gomez", "87654321", "Calle 2", 87654321);
@@ -43,15 +42,6 @@ public class Almacen {
 
     public String getNombre() {
         return nombre;
-    }
-    public String getClienteId(){
-        return cedula;
-    }
-    public String getcedula() {
-        return cedula;
-    }
-    public void setcedula(String cedula) {
-        this.cedula = cedula;
     }
     public String getNit() {
         return nit;
@@ -89,8 +79,8 @@ public class Almacen {
         this.facturas = facturas;
     }
 
-    public void agregarCliente(String nombre2, String apellido, String cedula, String direccion, int telefono) {
-        Cliente cliente = new Cliente(nombre2, apellido, cedula, direccion, telefono);
+    public void agregarCliente(String nombre, String apellido, String cedula, String direccion, int telefono) {
+        Cliente cliente = new Cliente(nombre, apellido, cedula, direccion, telefono);
         clientes.add(cliente);
     }
     public boolean eliminarcliente(String cedula){ {
