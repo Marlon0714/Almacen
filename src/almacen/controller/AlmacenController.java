@@ -4,6 +4,7 @@
  */
 package almacen.controller;
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import javax.management.Notification;
@@ -234,14 +235,19 @@ public class AlmacenController implements Initializable {
         String idCliente = txtCedula.getText();
         String direccion = txtDireccion.getText();
 
-
-
+        if(mnBtnTipoPersona.getText().equals(itemTipoPersonaJuridica.getText())){
+            String idTributaria = txtidTributaria.getText();
+            String nit = txtNitCliente.getText();
+        }else if(mnBtnTipoPersona.getText().equals(itemTipoPersonaNatural.getText())){
+            String email = txtEmail.getText();
+            String fechaNacimiento = dateFechaNacimiento.getValue().toString();
+        }
         if(datosValidos(nombre, apellidos, idCliente, direccion, telefono) == true){
             listaClientes.add(new Cliente(nombre, apellidos, idCliente,direccion, telefono)); 
-            //Cliente c = new Cliente(nombre, apellidos, idCliente, direccion, telefono);
-             this.aplicacion.añadirCliente(nombre, apellidos, idCliente,direccion, telefono);
+            this.aplicacion.añadirCliente(nombre, apellidos, idCliente,direccion, telefono);
         }
     }
+    
     private void añadirCliente(String nombre, String apellidos, String idCliente, String direccion, int telefono) {
         if(aplicacion.añadirCliente(nombre, apellidos, idCliente, direccion, telefono)){
             mostrarMensaje("Notificaión","El cliente se ha añadido","El cliente se añadió correctamente");
