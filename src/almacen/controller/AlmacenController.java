@@ -58,12 +58,8 @@ public class AlmacenController implements Initializable {
         if(newSelection != null){
             clienteSeleccion = newSelection;
             mostarInformacion();
-        }
+            }
         });
-
-
-
-
     }
     private void mostarInformacion() {
         if(clienteSeleccion != null){
@@ -72,9 +68,11 @@ public class AlmacenController implements Initializable {
             txtCedula.setText(clienteSeleccion.getCedula());
             txtTelefono.setText(clienteSeleccion.getTelefono());
             txtDireccion.setText(clienteSeleccion.getDireccion());
+            txtCedula.setDisable(true);}
 
         }
-    }
+    
+    
     private Cliente clienteSeleccion;
     public void setAplicacion(Aplicacion aplicacion) {
         this.aplicacion = aplicacion;
@@ -294,10 +292,10 @@ public class AlmacenController implements Initializable {
             mostrarMensaje("Notificación","Error", "Informacion inválida");
             return false;
         }
-
         if(notificacion.equals("")){
-            mostrarMensaje("Notificacion","Clieente registrado" , "El cliente se ha registrado correctamente");
-            return true;}
+            mostrarMensaje("Notificacion","Cliente registrado" , "El cliente se ha registrado correctamente");
+            return true;
+        }
 
 
         return false;
@@ -409,7 +407,15 @@ public class AlmacenController implements Initializable {
             txtTemperaturaRecomendada.setVisible(true);
         }
     }
-
+    @FXML
+    void nuevoCliente(ActionEvent event){
+        txtNombreCliente.setText("Ingrese el nombre del cliente");
+        txtApellidoCliente.setText("Apellidos del cliente");
+        txtCedula.setText("Cedula del cliente");
+        txtTelefono.setText("Telefono del cliente");
+        txtDireccion.setText("Direccion del cliente");
+        txtCedula.setDisable(false);
+    }
     @FXML
     void selectProductoEnvasado(ActionEvent event) {
         mnBtnTipoProducto.setText(itemProductoEnvasado.getText());

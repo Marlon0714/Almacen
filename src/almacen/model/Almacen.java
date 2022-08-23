@@ -108,6 +108,23 @@ public class Almacen {
     }
 
     public void modificarCliente(String nombre2, String apellidos, String cedula, String direccion, String telefono) {
+        Cliente cliente = new Cliente(nombre, apellidos, cedula, direccion, telefono);
+        int pos = obtenerPosicionCliente(cedula);
+        clientes.set(pos, cliente);
+        
+    }
+    public int obtenerPosicionCliente(String cedula){
+        int posicion = 0;
+        boolean flagEncontrado = false;
+        do {
+            for(int i = 0; i < clientes.size(); i++){
+                if (clientes.get(i).getCedula().equals(cedula)) {
+                    posicion = i;
+                    flagEncontrado = true;
+                }
+            }
+        }while(flagEncontrado = false);
+     return posicion;
     }
 
 }
