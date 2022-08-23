@@ -235,7 +235,7 @@ public class AlmacenController implements Initializable {
 
 
 
-    
+
 
     @FXML
     void actualizarProducto(ActionEvent event) {
@@ -273,9 +273,6 @@ public class AlmacenController implements Initializable {
             this.aplicacion.añadirCliente(nombre, apellido, cedula,direccion, telefono, email, fechaNacimiento, idTributaria, nit);
         }
     }
-
-
-    
 
     private boolean datosValidos(String nombre, String apellidos, String idCliente, String direccion, String telefono) {
         String notificacion = "";
@@ -342,7 +339,7 @@ public class AlmacenController implements Initializable {
     }
     @FXML
     void agregarProducto(ActionEvent event) {
-
+        
     }
 
     @FXML
