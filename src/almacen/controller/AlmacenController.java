@@ -178,13 +178,13 @@ public class AlmacenController implements Initializable {
 
     @FXML
     private TextField txtCodigoAprobacion;
-    
+
     @FXML
     private TextField txtTemperaturaRecomendada;
 
     @FXML
     private TextField txtPesoEnvase;
-    
+
     @FXML
     private DatePicker dateFechaEnvasado;
 
@@ -268,15 +268,15 @@ public class AlmacenController implements Initializable {
         if(datosValidos(nombre, apellido, cedula, direccion, telefono) == true){
             listaClientes.add(new Cliente(nombre, apellido, cedula,direccion, telefono));
             //Cliente c = new Cliente(nombre, apellidos, idCliente, direccion, telefono);
+            mostrarMensaje("Notificaión","El cliente se ha añadido","El cliente se añadió correctamente");
+            aplicacion.añadirCliente(nombre, apellido, cedula, direccion, telefono, email, fechaNacimiento, idTributaria, nit);
             this.aplicacion.añadirCliente(nombre, apellido, cedula,direccion, telefono, email, fechaNacimiento, idTributaria, nit);
         }
     }
-    private void añadirCliente(String nombre, String apellido, String cedula, String direccion, String telefono, String email, String fechaNacimiento, String idTributaria, String nit) {
 
-        if(aplicacion.añadirCliente(nombre, apellido, cedula,direccion, telefono, email, fechaNacimiento, idTributaria, nit)){
-            mostrarMensaje("Notificaión","El cliente se ha añadido","El cliente se añadió correctamente");
-        };
-    }
+
+    
+
     private boolean datosValidos(String nombre, String apellidos, String idCliente, String direccion, String telefono) {
         String notificacion = "";
         if (nombre == null || nombre.equals("")) {
@@ -300,7 +300,7 @@ public class AlmacenController implements Initializable {
             return false;
         }
         if(notificacion.equals("")){
-            mostrarMensaje("Notificacion","Cliente registrado" , "El cliente se ha registrado correctamente");
+            
             return true;
         }
 
@@ -331,6 +331,8 @@ public class AlmacenController implements Initializable {
                 clienteSeleccion.setCedula(cedula);
                 clienteSeleccion.setDireccion(direccion);
                 clienteSeleccion.setTelefono(telefono);
+                mostrarMensaje("Notificación","El cliente se ha actualizado","El cliente se actualizó correctamente");
+
                 tableViewClientes.refresh();
             }
 
