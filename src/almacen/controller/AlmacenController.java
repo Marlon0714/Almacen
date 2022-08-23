@@ -46,7 +46,7 @@ public class AlmacenController implements Initializable {
 
 
         this.columnNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-        this.columnApellido.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
+        this.columnApellido.setCellValueFactory(new PropertyValueFactory<>("apellido"));
         this.columnTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
         this.columnId.setCellValueFactory(new PropertyValueFactory<>("cedula"));
         this.columnDireccion.setCellValueFactory(new PropertyValueFactory<>("direccion"));
@@ -68,7 +68,14 @@ public class AlmacenController implements Initializable {
             txtCedula.setText(clienteSeleccion.getCedula());
             txtTelefono.setText(clienteSeleccion.getTelefono());
             txtDireccion.setText(clienteSeleccion.getDireccion());
-            txtCedula.setDisable(true);}
+            txtCedula.setDisable(true);
+            mnBtnTipoPersona.setDisable(true);
+            mnBtnTipoPersona.setText("Tipo de Persona");
+            txtEmail.setVisible(false);
+            dateFechaNacimiento.setVisible(false);
+            txtidTributaria.setVisible(false);
+            txtNitCliente.setVisible(false);
+        }
 
         }
     
