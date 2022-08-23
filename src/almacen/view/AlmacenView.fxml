@@ -221,11 +221,11 @@
                                                    <children>
                                                       <TableView fx:id="tableViewFacturas" layoutX="-1.0" prefHeight="219.0" prefWidth="434.0">
                                                          <columns>
-                                                            <TableColumn prefWidth="58.39996337890625" text="Código" />
-                                                            <TableColumn prefWidth="74.39996337890625" text="Fecha" />
-                                                            <TableColumn prefWidth="189.60003662109375" text="Cliente" />
-                                                            <TableColumn prefWidth="35.20001220703125" text="Iva" />
-                                                            <TableColumn prefWidth="77.5999755859375" text="Total" />
+                                                            <TableColumn fx:id="columnCodigoFactura" prefWidth="58.39996337890625" text="Código" />
+                                                            <TableColumn fx:id="columnFechaFactura" prefWidth="74.39996337890625" text="Fecha" />
+                                                            <TableColumn fx:id="columnClienteFactura" prefWidth="189.60003662109375" text="Cliente" />
+                                                            <TableColumn fx:id="columnIvaFactura" prefWidth="35.20001220703125" text="Iva" />
+                                                            <TableColumn fx:id="columnTotalFactura" prefWidth="77.5999755859375" text="Total" />
                                                          </columns>
                                                       </TableView>
                                                    </children>
