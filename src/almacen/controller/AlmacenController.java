@@ -164,7 +164,7 @@ public class AlmacenController implements Initializable {
 
     @FXML
     private TableColumn<Producto,String> columnDescripcion;
-    
+
     @FXML
     private TableColumn<Producto,String> columnValorUnit;
 
@@ -540,9 +540,23 @@ public class AlmacenController implements Initializable {
         txtTelefono.setPromptText("Telefono del cliente");
         txtDireccion.setPromptText("Direccion del cliente");
         txtCedula.setDisable(false);
-        
-        
     }
+    @FXML
+    void nuevoProducto(ActionEvent event){
+        txtNombreProducto.setText("");
+        txtCodigoProducto.setText("");
+        txtDescripcionProducto.setText("");
+        txtValorProducto.setText("");
+        txtExistenciasProducto.setText("");
+
+        txtNombreProducto.setPromptText("Ingrese el nombre del producto");
+        txtCodigoProducto.setPromptText("Ingrese el código del producto");
+        txtDescripcionProducto.setPromptText("Ingrese el descripcion del producto");
+        txtValorProducto.setPromptText("Ingrese el valor del producto");
+        txtExistenciasProducto.setPromptText("Ingrese el existencias del producto");
+        txtCodigoProducto.setDisable(false);
+    }
+
     @FXML
     void selectProductoEnvasado(ActionEvent event) {
         mnBtnTipoProducto.setText(itemProductoEnvasado.getText());

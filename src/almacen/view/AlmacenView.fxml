@@ -95,7 +95,7 @@
                                           <MenuItem fx:id="itemProductoEnvasado" mnemonicParsing="false" onAction="#selectProductoEnvasado" text="Envasado" />
                                       </items>
                                     </MenuButton>
-                                    <Button fx:id="btnNuevoProducto" layoutX="494.0" layoutY="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Nuevo" />
+                                    <Button fx:id="btnNuevoProducto" layoutX="494.0" layoutY="33.0" mnemonicParsing="false" onAction="#nuevoProducto" prefHeight="25.0" prefWidth="76.0" text="Nuevo" />
                                     <Button fx:id="btnActualizarProducto" layoutX="495.0" layoutY="101.0" mnemonicParsing="false" onAction="#actualizarProducto" prefHeight="25.0" prefWidth="74.0" text="Actualizar" />
                                     <Button fx:id="btnAgregarProducto" layoutX="496.0" layoutY="163.0" mnemonicParsing="false" onAction="#agregarProducto" prefHeight="25.0" prefWidth="74.0" text="Agregar" />
                                     <Separator layoutX="447.0" layoutY="31.0" orientation="VERTICAL" prefHeight="196.0" prefWidth="5.0" />
