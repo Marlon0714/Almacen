@@ -3,28 +3,28 @@ package almacen.model;
 
 public class PersonaJuridica extends Cliente {
     
-    private int idTributaria;
-    private int nit;
+    private String idTributaria;
+    private String nit;
 
-    public PersonaJuridica(int idTributaria, int nit, String nombre, String apellidos, String cedula, String direccion, int telefono) {
+    public PersonaJuridica(String idTributaria, String nit, String nombre, String apellidos, String cedula, String direccion, String telefono) {
         super(nombre, apellidos, cedula, direccion, telefono);
         this.idTributaria = idTributaria;
         this.nit = nit;
     }
 
-    public int getIdTributaria() {
+    public String getIdTributaria() {
         return idTributaria;
     }
 
-    public int getNit() {
+    public String getNit() {
         return nit;
     }
 
-    public void setIdTributaria(int idTributaria) {
+    public void setIdTributaria(String idTributaria) {
         this.idTributaria = idTributaria;
     }
 
-    public void setNit(int nit) {
+    public void setNit(String nit) {
         this.nit = nit;
     }
     

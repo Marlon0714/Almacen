@@ -1,7 +1,7 @@
 
 package almacen.model;
 
-import java.util.Date;
+
 import java.util.ArrayList;
 
 public class Almacen {
@@ -17,9 +17,9 @@ public class Almacen {
         this.nombre = nombre;
         this.nit = nit;
         //Crear tres clientes
-        Cliente cliente1 = new Cliente("Juan", "Perez", "12345678", "Calle 1", 12345678);
-        Cliente cliente2 = new Cliente("Pedro", "Gomez", "87654321", "Calle 2", 87654321);
-        Cliente cliente3 = new Cliente("Maria", "Lopez", "98765432", "Calle 3", 98765432);
+        Cliente cliente1 = new Cliente("Juan", "Perez", "12345678", "Calle 1", "12345678");
+        Cliente cliente2 = new Cliente("Pedro", "Gomez", "87654321", "Calle 2", "87654321");
+        Cliente cliente3 = new Cliente("Maria", "Lopez", "98765432", "Calle 3", "98765432");
         //Agregar clientes al almacen
         clientes.add(cliente1);
         clientes.add(cliente2);
@@ -80,18 +80,15 @@ public class Almacen {
         this.facturas = facturas;
     }
 
-    public void agregarCliente(String nombre, String apellido, String cedula, String direccion, int telefono) {
+    public void agregarCliente(String nombre, String apellido, String cedula, String direccion, String telefono, String email, String fechaNacimiento, String idTributaria, String nit) {
+
         Cliente cliente = new Cliente(nombre, apellido, cedula, direccion, telefono);
-        clientes.add(cliente);
-    }
 
-    public void agregarCliente(String nombre, String apellido, String cedula, String direccion, int telefono, String email, Date fechaNacimiento) {
-        Cliente cliente = new PersonaNatural(email, fechaNacimiento, nombre, apellido, cedula, direccion, telefono);
-        clientes.add(cliente);
-    }
-
-    public void agregarCliente(String nombre, String apellido, String cedula, String direccion, int telefono, int idTributaria, int nit) {
-        Cliente cliente = new PersonaJuridica(idTributaria, nit, nombre, apellido, cedula, direccion, telefono);
+        if(email == null && fechaNacimiento == null){
+            cliente = new PersonaJuridica(idTributaria, nit, nombre, apellido,cedula,direccion,telefono);
+        }else if(idTributaria == null && nit == null){
+            cliente = new PersonaNatural(email, fechaNacimiento,nombre, apellido,cedula,direccion,telefono);
+        }
         clientes.add(cliente);
     }
 
@@ -108,6 +105,9 @@ public class Almacen {
             } while (flagEliminado == false);
         return flagEliminado;
         }
+    }
+
+    public void modificarCliente(String nombre2, String apellidos, String cedula, String direccion, String telefono) {
     }
 
 }

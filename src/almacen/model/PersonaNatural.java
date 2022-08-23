@@ -1,15 +1,15 @@
 
 package almacen.model;
 
-import java.util.Date;
+
 
 
 public class PersonaNatural extends Cliente{
     
     private String email;
-    private Date fechaNacimiento;
+    private String fechaNacimiento;
 
-    public PersonaNatural(String email, Date fechaNacimiento, String nombre, String apellidos, String cedula, String direccion, int telefono) {
+    public PersonaNatural(String email, String fechaNacimiento, String nombre, String apellidos, String cedula, String direccion, String telefono) {
         super(nombre, apellidos, cedula, direccion, telefono);
         this.email = email;
         this.fechaNacimiento = fechaNacimiento;
@@ -19,7 +19,7 @@ public class PersonaNatural extends Cliente{
         return email;
     }
 
-    public Date getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
@@ -27,7 +27,7 @@ public class PersonaNatural extends Cliente{
         this.email = email;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
     

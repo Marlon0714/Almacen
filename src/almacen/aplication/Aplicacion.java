@@ -65,8 +65,8 @@ public class Aplicacion extends Application {
     public Almacen getAlmacen() {
         return almacen;
     }
-    public boolean añadirCliente(String nombre, String apellido, String cedula, String direccion, int telefono){
-        almacen.agregarCliente(nombre, apellido, cedula, direccion, telefono);
+    public boolean añadirCliente(String nombre, String apellido, String cedula, String direccion, String telefono, String email, String fechaNacimiento, String idTributaria, String nit){
+        almacen.agregarCliente(nombre, apellido, cedula,direccion, telefono, email, fechaNacimiento, idTributaria, nit);
         return false;
     }
     public static void main(String[] args) {
@@ -76,6 +76,10 @@ public class Aplicacion extends Application {
     public boolean eliminarCliente(String cedula) {
         boolean eliminarcliente = almacen.eliminarcliente(cedula);
         return false;
+    }
+
+    public void actualizarCliente(String nombre, String apellidos, String cedula, String direccion, String telefono) {
+        almacen.modificarCliente(nombre,apellidos,cedula, direccion, telefono);
     }
     
 }
