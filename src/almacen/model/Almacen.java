@@ -123,13 +123,47 @@ public class Almacen {
                     flagEncontrado = true;
                 }
             }
-        }while(flagEncontrado = false);
+        }while(flagEncontrado == false);
      return posicion;
     }
+    public int obtenerPosicionProducto(String codigoProducto){
+        int pos = 0;
+        boolean flagEncontrado = false;
+        do {
+            for(int i = 0; i < productos.size(); i++){
+                if (productos.get(i).getCodigoProducto().equals(codigoProducto)) {
+                    pos = i;
+                    flagEncontrado = true;
+                }
 
+        }}while(flagEncontrado == false);
+        return pos;
+
+    }
+    public void modificarProducto(String nombreProducto, String codigoProducto, String descripcion,double valorUnitario, String existencias){
+        Producto producto = new Producto(nombreProducto, codigoProducto, descripcion, valorUnitario, existencias);
+        int pos = obtenerPosicionProducto(codigoProducto);
+        productos.set(pos, producto);
+    }
     public void añadirProducto(String nombreProducto, String codigoProducto, String descripcion, double valorUnitario, String existencias) {
         Producto producto = new Producto(nombreProducto, codigoProducto, descripcion, valorUnitario, existencias);
         productos.add(producto);
     }
+
+    public boolean eliminarProducto(String codigoProducto) {
+        boolean flagEliminado = false;
+        do {
+            for (int i = 0; i < productos.size(); i++) {
+                if (productos.get(i).getCodigoProducto().equals(codigoProducto)) {
+                    productos.remove(i);
+                    flagEliminado = true;
+
+                }
+            }
+            } while (flagEliminado == false);
+        return flagEliminado;
+    }
+
+
 
 }

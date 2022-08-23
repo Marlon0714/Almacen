@@ -63,7 +63,7 @@ public class AlmacenController implements Initializable {
         tableViewProductos.getSelectionModel().selectedItemProperty().addListener((obs,oldSelection,newSelection) -> {
             if (newSelection != null) {
                 productoSeleccion = newSelection;
-                mostarInformacionProducto();
+                mostrarInformacionProducto();
                 return;
             }
 
@@ -75,20 +75,12 @@ public class AlmacenController implements Initializable {
         tableViewClientes.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
         if(newSelection != null){
             clienteSeleccion = newSelection;
-            mostarInformacion();
+            mostrarInformacion();
             }
         });
     }
-    private void mostarInformacionProducto(){
-        if(productoSeleccion != null){
-            txtNombreProducto.setText(productoSeleccion.getNombre());
-            txtCodigoProducto.setText(productoSeleccion.getCodigoProducto());
-            txtDescripcionProducto.setText(productoSeleccion.getDescripcion());
-            txtValorProducto.setText(Double.toString(productoSeleccion.getValorUnitario()));
-            txtExistenciasProducto.setText(productoSeleccion.getExistente());
-        }
-    }
-    private void mostarInformacion() {
+
+    private void mostrarInformacion() {
         if(clienteSeleccion != null){
             txtNombreCliente.setText(clienteSeleccion.getNombre());
             txtApellidoCliente.setText(clienteSeleccion.getApellido());
@@ -96,15 +88,23 @@ public class AlmacenController implements Initializable {
             txtTelefono.setText(clienteSeleccion.getTelefono());
             txtDireccion.setText(clienteSeleccion.getDireccion());
             txtCedula.setDisable(true);
-            mnBtnTipoPersona.setDisable(true);
             mnBtnTipoPersona.setText("Tipo de Persona");
+            mnBtnTipoPersona.setDisable(true);
             txtEmail.setVisible(false);
             dateFechaNacimiento.setVisible(false);
             txtidTributaria.setVisible(false);
             txtNitCliente.setVisible(false);
+        }}
+    private void mostrarInformacionProducto(){
+        if(productoSeleccion != null){
+            txtNombreProducto.setText(productoSeleccion.getNombre());
+            txtCodigoProducto.setText(productoSeleccion.getCodigoProducto());
+            txtDescripcionProducto.setText(productoSeleccion.getDescripcion());
+            txtValorProducto.setText(Double.toString(productoSeleccion.getValorUnitario()));
+            txtExistenciasProducto.setText(productoSeleccion.getExistente());
+            txtCodigoProducto.setDisable(true);
         }
-
-        }
+    }
     
     private Producto productoSeleccion;
     private Cliente clienteSeleccion;
@@ -285,14 +285,6 @@ public class AlmacenController implements Initializable {
     @FXML
     private MenuButton mnBtnTipoProducto;
 
-
-
-
-
-    @FXML
-    void actualizarProducto(ActionEvent event) {
-
-    }
     @FXML
     void agregarProducto(ActionEvent event) {
         String nombreProducto = txtNombreProducto.getText();
@@ -434,7 +426,27 @@ public class AlmacenController implements Initializable {
             mostrarMensaje("Notificación","Error","No se ha seleccionado ningún cliente");
         }
     }
+    @FXML
+    void actualizarProducto(ActionEvent event) {
+        String nombreProducto = txtNombreProducto.getText();
+        String codigoProducto = txtCodigoProducto.getText();
+        String descripcion = txtDescripcionProducto.getText();
+        double valorUnitario =Double.parseDouble(txtValorProducto.getText());
+        String existencias = txtExistenciasProducto.getText();
 
+        if(datosValidosProducto(nombreProducto, codigoProducto, descripcion, valorUnitario, existencias) == true){
+            aplicacion.actualizarProducto(nombreProducto, codigoProducto, descripcion, valorUnitario, existencias);
+            productoSeleccion.setNombre(nombreProducto);
+            productoSeleccion.setCodigoProducto(codigoProducto);
+            productoSeleccion.setDescripcion(descripcion);
+            productoSeleccion.setValorUnitario(valorUnitario);
+            productoSeleccion.setExistente(existencias);
+            mostrarMensaje("Notificación", "Cliente Actualizado", "El cliente se actualizó correctamente");
+        
+            tableViewProductos.refresh();
+        }
+
+    }
     @FXML
     void eliminarCliente(ActionEvent event) {
         if(clienteSeleccion != null){
@@ -453,7 +465,16 @@ public class AlmacenController implements Initializable {
 
     @FXML
     void eliminarProducto(ActionEvent event) {
+        if(productoSeleccion != null){
+            listaProductos.remove(productoSeleccion);
+            if(aplicacion.eliminarProducto(productoSeleccion.getCodigoProducto())){
+                mostrarMensaje("Notificación","Error", "No se ha seleccionado ningún producto");
 
+            }else{
+                mostrarMensaje("Notificación","El producto se ha eliminado","El producto se eliminó correctamente");
+
+            }
+        }
     }
 
 
@@ -519,6 +540,8 @@ public class AlmacenController implements Initializable {
         txtTelefono.setPromptText("Telefono del cliente");
         txtDireccion.setPromptText("Direccion del cliente");
         txtCedula.setDisable(false);
+        
+        
     }
     @FXML
     void selectProductoEnvasado(ActionEvent event) {

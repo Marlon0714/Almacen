@@ -85,5 +85,15 @@ public class Aplicacion extends Application {
     public void añadirProducto(String nombreProducto, String codigoProducto, String descripcion,double valorUnitario, String existencias) {
         almacen.añadirProducto(nombreProducto,codigoProducto,descripcion,valorUnitario,existencias);
     }
+
+    public boolean eliminarProducto(String codigoProducto) {
+        boolean eliminarProducto = almacen.eliminarProducto(codigoProducto);
+        return false;
+    }
+
+    public void actualizarProducto(String nombreProducto, String codigoProducto, String descripcion,double valorUnitario, String existencias) {
+        almacen.modificarProducto(nombreProducto,codigoProducto,descripcion,valorUnitario,existencias);
+
+    }
     
 }
