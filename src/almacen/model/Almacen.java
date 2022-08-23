@@ -25,12 +25,12 @@ public class Almacen {
         clientes.add(cliente2);
         clientes.add(cliente3);
         //Crear dos perecederos, dos refirgerados y dos envasados
-        Producto perecedero1 = new Producto(1, "Perecedero 1", "Perecedero 1", 100.0, 10);
-        Producto perecedero2 = new Producto(2, "Perecedero 2", "Perecedero 2", 200.0, 20);
-        Producto refrigerado1 = new Producto(3, "Refrigerado 1", "Refrigerado 1", 300.0, 30);
-        Producto refrigerado2 = new Producto(4, "Refrigerado 2", "Refrigerado 2", 400.0, 40);
-        Producto envasado1 = new Producto(5, "Envasado 1", "Envasado 1", 500.0, 50);
-        Producto envasado2 = new Producto(6, "Envasado 2", "Envasado 2", 600.0, 60);
+        Producto perecedero1 = new Producto("Perecedero 2", "1", "Perecedero 1", 100.0, "10");
+        Producto perecedero2 = new Producto("Perecedero 1", "2", "Perecedero 2", 200.0, "20");
+        Producto refrigerado1 = new Producto("Refrigerado 1", "12", "Refrigerado 1", 300.0, "30");
+        Producto refrigerado2 = new Producto("Refirgerado 2", "2", "Refrigerado 2", 400.0, "40");
+        Producto envasado1 = new Producto("Envasado 1", "1", "Envasado 1", 500.0, "50");
+        Producto envasado2 = new Producto("Envasado 2", "2", "Envasado 2", 600.0, "60");
         //Agregar productos al almacen
         productos.add(perecedero1);
         productos.add(perecedero2);
@@ -125,6 +125,11 @@ public class Almacen {
             }
         }while(flagEncontrado = false);
      return posicion;
+    }
+
+    public void añadirProducto(String nombreProducto, String codigoProducto, String descripcion, double valorUnitario, String existencias) {
+        Producto producto = new Producto(nombreProducto, codigoProducto, descripcion, valorUnitario, existencias);
+        productos.add(producto);
     }
 
 }

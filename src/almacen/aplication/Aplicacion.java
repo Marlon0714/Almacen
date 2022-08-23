@@ -81,5 +81,9 @@ public class Aplicacion extends Application {
     public void actualizarCliente(String nombre, String apellidos, String cedula, String direccion, String telefono) {
         almacen.modificarCliente(nombre,apellidos,cedula, direccion, telefono);
     }
+
+    public void añadirProducto(String nombreProducto, String codigoProducto, String descripcion,double valorUnitario, String existencias) {
+        almacen.añadirProducto(nombreProducto,codigoProducto,descripcion,valorUnitario,existencias);
+    }
     
 }

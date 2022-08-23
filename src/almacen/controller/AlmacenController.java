@@ -4,7 +4,7 @@
  */
 package almacen.controller;
 import java.net.URL;
-import java.util.Date;
+
 import java.util.ResourceBundle;
 
 import javax.management.Notification;
@@ -20,6 +20,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import almacen.aplication.Aplicacion;
 import almacen.model.Almacen;
 import almacen.model.Cliente;
+import almacen.model.Producto;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -37,6 +38,7 @@ public class AlmacenController implements Initializable {
     private Aplicacion aplicacion;
     private Almacen almacen;
     ObservableList<Cliente> listaClientes = FXCollections.observableArrayList();
+    ObservableList<Producto> listaProductos = FXCollections.observableArrayList();
 
     /**
      * Initializes the controller class.
@@ -51,6 +53,22 @@ public class AlmacenController implements Initializable {
         this.columnId.setCellValueFactory(new PropertyValueFactory<>("cedula"));
         this.columnDireccion.setCellValueFactory(new PropertyValueFactory<>("direccion"));
 
+        this.columnNombreProducto.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        this.columnCodigo.setCellValueFactory(new PropertyValueFactory<>("CodigoProducto"));
+        this.columnDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+        this.columnValorUnit.setCellValueFactory(new PropertyValueFactory<>("valorUnitario"));
+        this.columnExistencias.setCellValueFactory(new PropertyValueFactory<>("existente"));
+
+        this.tableViewProductos.setItems(listaProductos);
+        tableViewProductos.getSelectionModel().selectedItemProperty().addListener((obs,oldSelection,newSelection) -> {
+            if (newSelection != null) {
+                productoSeleccion = newSelection;
+                mostarInformacionProducto();
+                return;
+            }
+
+        });
+
 
 
         this.tableViewClientes.setItems(listaClientes);
@@ -60,6 +78,15 @@ public class AlmacenController implements Initializable {
             mostarInformacion();
             }
         });
+    }
+    private void mostarInformacionProducto(){
+        if(productoSeleccion != null){
+            txtNombreProducto.setText(productoSeleccion.getNombre());
+            txtCodigoProducto.setText(productoSeleccion.getCodigoProducto());
+            txtDescripcionProducto.setText(productoSeleccion.getDescripcion());
+            txtValorProducto.setText(Double.toString(productoSeleccion.getValorUnitario()));
+            txtExistenciasProducto.setText(productoSeleccion.getExistente());
+        }
     }
     private void mostarInformacion() {
         if(clienteSeleccion != null){
@@ -79,7 +106,7 @@ public class AlmacenController implements Initializable {
 
         }
     
-    
+    private Producto productoSeleccion;
     private Cliente clienteSeleccion;
     public void setAplicacion(Aplicacion aplicacion) {
         this.aplicacion = aplicacion;
@@ -88,13 +115,20 @@ public class AlmacenController implements Initializable {
         tableViewClientes.getItems().clear();
         tableViewClientes.setItems(getClientes());
 
+        tableViewProductos.getItems().clear();
+        tableViewProductos.setItems(getProductos());
+
     }
 
     private ObservableList<Cliente> getClientes() {
         listaClientes.addAll(almacen.getClientes());
         return listaClientes;
     }
+    private ObservableList<Producto> getProductos() {
+        listaProductos.addAll(almacen.getProductos());
+        return listaProductos;
 
+    }
     @FXML
     private Button btnActualizarCliente;
 
@@ -118,6 +152,24 @@ public class AlmacenController implements Initializable {
 
     @FXML
     private Button btnNuevoProducto;
+
+    @FXML
+    private TableView<Producto>tableViewProductos;
+
+    @FXML
+    private TableColumn<Producto,String> columnNombreProducto;
+
+    @FXML
+    private TableColumn<Producto, String> columnCodigo;
+
+    @FXML
+    private TableColumn<Producto,String> columnDescripcion;
+    
+    @FXML
+    private TableColumn<Producto,String> columnValorUnit;
+
+    @FXML
+    private TableColumn<Producto,String> columnExistencias;
 
     @FXML
     private TableColumn<Cliente, String> columnNombre;
@@ -241,6 +293,21 @@ public class AlmacenController implements Initializable {
     void actualizarProducto(ActionEvent event) {
 
     }
+    @FXML
+    void agregarProducto(ActionEvent event) {
+        String nombreProducto = txtNombreProducto.getText();
+        String codigoProducto = txtCodigoProducto.getText();
+        String descripcion = txtDescripcionProducto.getText();
+        double valorUnitario =Double.parseDouble(txtValorProducto.getText());
+        String existencias = txtExistenciasProducto.getText();
+
+        if(datosValidosProducto(nombreProducto, codigoProducto, descripcion, valorUnitario, existencias) == true){
+            listaProductos.add(new Producto(nombreProducto, codigoProducto, descripcion, valorUnitario, existencias));
+            aplicacion.añadirProducto(nombreProducto, codigoProducto, descripcion, valorUnitario, existencias);
+            this.aplicacion.añadirProducto(nombreProducto, codigoProducto, descripcion, valorUnitario, existencias);
+        }
+
+    }
 
     @FXML
     void agregarCliente(ActionEvent event) {
@@ -273,7 +340,37 @@ public class AlmacenController implements Initializable {
             this.aplicacion.añadirCliente(nombre, apellido, cedula,direccion, telefono, email, fechaNacimiento, idTributaria, nit);
         }
     }
-
+    private boolean datosValidosProducto(String nombreProducto, String codigoProducto, String descripcion, double valorUnitario, String existencias){
+        int n = 0;
+        if (nombreProducto == null || nombreProducto.equals("")){
+            mostrarMensaje("Notificación", "Error", "Informacion inválida");
+            n ++;
+            return false;
+        }
+        if (codigoProducto == null || codigoProducto.equals("")){
+            mostrarMensaje("Notificación", "Error", "Informacion inválida");
+            n++;
+            return false;
+        }
+        if (descripcion == null || descripcion.equals("")){
+            mostrarMensaje("Notificación", "Error", "Informacion inválida");
+            n++;
+            return false;
+        }
+        if (valorUnitario == 0.0){
+            mostrarMensaje("Notificación", "Error", "Informacion inválida");
+            n++;
+            return false;
+        }
+        if (existencias == null || existencias.equals("")) {
+            mostrarMensaje("Notificación", "Error", "Informacion inválida");
+            n++;
+            return false;}
+        if (n == 0) {
+            return true;
+        }
+        return false;
+    }
     private boolean datosValidos(String nombre, String apellidos, String idCliente, String direccion, String telefono) {
         String notificacion = "";
         if (nombre == null || nombre.equals("")) {
@@ -336,10 +433,6 @@ public class AlmacenController implements Initializable {
         }else{
             mostrarMensaje("Notificación","Error","No se ha seleccionado ningún cliente");
         }
-    }
-    @FXML
-    void agregarProducto(ActionEvent event) {
-        
     }
 
     @FXML

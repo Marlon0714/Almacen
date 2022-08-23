@@ -3,26 +3,26 @@ package almacen.model;
 
 public class Producto {
     
-    private int codigoProducto;
-    private String nombre;
+    private String codigoProducto;
+    private String nombreProducto;
     private String descripcion;
     private double valorUnitario;
-    private int existente;
+    private String existente;
 
-    public Producto(int codigoProducto, String nombre, String descripcion, double valorUnitario, int existente) {
+    public Producto(String nombreProducto, String codigoProducto, String descripcion, double valorUnitario, String existente) {
+        this.nombreProducto = nombreProducto;
         this.codigoProducto = codigoProducto;
-        this.nombre = nombre;
         this.descripcion = descripcion;
         this.valorUnitario = valorUnitario;
         this.existente = existente;
     }
 
-    public int getCodigoProducto() {
+    public String getCodigoProducto() {
         return codigoProducto;
     }
 
     public String getNombre() {
-        return nombre;
+        return nombreProducto;
     }
 
     public String getDescripcion() {
@@ -33,16 +33,16 @@ public class Producto {
         return valorUnitario;
     }
 
-    public int getExistente() {
+    public String getExistente() {
         return existente;
     }
 
-    public void setCodigoProducto(int codigoProducto) {
+    public void setCodigoProducto(String codigoProducto) {
         this.codigoProducto = codigoProducto;
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.nombreProducto = nombre;
     }
 
     public void setDescripcion(String descripcion) {
@@ -53,8 +53,9 @@ public class Producto {
         this.valorUnitario = valorUnitario;
     }
 
-    public void setExistente(int existente) {
+    public void setExistente(String existente) {
         this.existente = existente;
     }
-    
+
+
 }
