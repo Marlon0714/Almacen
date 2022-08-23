@@ -10,10 +10,10 @@ public class Venta {
     private int cantidadProducto;
     private double subTotal;
 
-    public Venta(Producto producto, int cantidadProducto, double subTotal) {
+    public Venta(Producto producto, int cantidadProducto) {
         this.producto = producto;
         this.cantidadProducto = cantidadProducto;
-        this.subTotal = subTotal;
+        this.subTotal = calcularSubtotal();
     }
 
     public Producto getProducto() {
@@ -40,4 +40,9 @@ public class Venta {
         this.subTotal = subTotal;
     }
     
+    public double calcularSubtotal() {
+        double subTotal = cantidadProducto * producto.getValorUnitario();
+        return subTotal;
+    }
+
 }
