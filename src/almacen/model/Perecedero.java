@@ -1,22 +1,22 @@
 
 package almacen.model;
 
-import java.util.Date;
+
 
 public class Perecedero extends Producto{
     
-    private Date fechaVencimiento;
+    private String fechaVencimiento;
 
-    public Perecedero(Date fechaVencimiento, int codigo, String nombre, String descripcion, double valorUnitario, int existente) {
+    public Perecedero(String fechaVencimiento, String codigo, String nombre, String descripcion, double valorUnitario, String existente) {
         super(codigo, nombre, descripcion, valorUnitario, existente);
         this.fechaVencimiento = fechaVencimiento;
     }
 
-    public Date getFechaVencimiento() {
+    public String getFechaVencimiento() {
         return fechaVencimiento;
     }
 
-    public void setFechaVencimiento(Date fechaVencimiento) {
+    public void setFechaVencimiento(String fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;
     }
     

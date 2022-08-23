@@ -131,6 +131,23 @@ public class AlmacenController implements Initializable {
     @FXML
     private TableColumn<Cliente, String> columnNombre;
 
+    @FXML
+    private TableColumn<Venta, String> columnCantidadVenta;
+
+    @FXML
+    private TableColumn<Venta, String> columnNombreVenta;
+
+    @FXML
+    private TableColumn<Venta, String> columnSubTotalVenta;
+
+    @FXML
+    private TableColumn<Venta, String> columnValorUVenta;
+
+    @FXML
+    private TableColumn<Venta, String> columnCodigoVenta;
+
+    @FXML
+    private TableColumn<Venta, String> columnDescripcionVenta;
 
     @FXML
     private TableColumn<Cliente, String> columnApellido;

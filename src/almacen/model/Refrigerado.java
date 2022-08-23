@@ -3,16 +3,16 @@ package almacen.model;
 
 public class Refrigerado extends Producto{
     
-    private int codigoAprobacion;
+    private String codigoAprobacion;
     private float temperaturaRecomendada;
 
-    public Refrigerado(int codigoAprobacion, float temperaturaRecomendada, int codigo, String nombre, String descripcion, double valorUnitario, int existente) {
+    public Refrigerado(String codigoAprobacion, float temperaturaRecomendada, String codigo, String nombre, String descripcion, double valorUnitario, String existente) {
         super(codigo, nombre, descripcion, valorUnitario, existente);
         this.codigoAprobacion = codigoAprobacion;
         this.temperaturaRecomendada = temperaturaRecomendada;
     }
 
-    public int getCodigoAprobacion() {
+    public String getCodigoAprobacion() {
         return codigoAprobacion;
     }
 
@@ -20,7 +20,7 @@ public class Refrigerado extends Producto{
         return temperaturaRecomendada;
     }
 
-    public void setCodigoAprobacion(int codigoAprobacion) {
+    public void setCodigoAprobacion(String codigoAprobacion) {
         this.codigoAprobacion = codigoAprobacion;
     }
 

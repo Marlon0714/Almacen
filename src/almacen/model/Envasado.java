@@ -1,22 +1,22 @@
 
 package almacen.model;
 
-import java.util.Date;
+
 
 public class Envasado extends Producto{
     
-    private Date fechaEnvasado;
+    private String fechaEnvasado;
     private float pesoEnvasado;
     private String paisOrigen;
 
-    public Envasado(Date fechaEnvasado, float pesoEnvasado, String paisOrigen, int codigo, String nombre, String descripcion, double valorUnitario, int existente) {
+    public Envasado(String fechaEnvasado, float pesoEnvasado, String paisOrigen, String codigo, String nombre, String descripcion, double valorUnitario, String existente) {
         super(codigo, nombre, descripcion, valorUnitario, existente);
         this.fechaEnvasado = fechaEnvasado;
         this.pesoEnvasado = pesoEnvasado;
         this.paisOrigen = paisOrigen;
     }
 
-    public Date getFechaEnvasado() {
+    public String getFechaEnvasado() {
         return fechaEnvasado;
     }
 
@@ -28,7 +28,7 @@ public class Envasado extends Producto{
         return paisOrigen;
     }
 
-    public void setFechaEnvasado(Date fechaEnvasado) {
+    public void setFechaEnvasado(String fechaEnvasado) {
         this.fechaEnvasado = fechaEnvasado;
     }
 
