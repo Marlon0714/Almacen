@@ -69,7 +69,7 @@ public class AlmacenController implements Initializable {
             txtNombreCliente.setText(clienteSeleccion.getNombre());
             txtApellidoCliente.setText(clienteSeleccion.getApellidos());
             txtCedula.setText(clienteSeleccion.getCedula());
-            txtTelefono.setText(Integer.toString(clienteSeleccion.getTelefono()));
+            txtTelefono.setText(clienteSeleccion.getTelefono());
             txtDireccion.setText(clienteSeleccion.getDireccion());
 
         }
@@ -241,7 +241,7 @@ public class AlmacenController implements Initializable {
 
         String nombre = txtNombreCliente.getText();
         String apellidos = txtApellidoCliente.getText();
-        int telefono = Integer.parseInt(this.txtTelefono.getText());
+        String telefono =txtTelefono.getText();
         String cedula = txtCedula.getText();
         String direccion = txtDireccion.getText();
 
@@ -251,12 +251,12 @@ public class AlmacenController implements Initializable {
              this.aplicacion.añadirCliente(nombre, apellidos, cedula,direccion, telefono);
         }
     }
-    private void añadirCliente(String nombre, String apellidos, String idCliente, String direccion, int telefono) {
+    private void añadirCliente(String nombre, String apellidos, String idCliente, String direccion, String telefono) {
         if(aplicacion.añadirCliente(nombre, apellidos, idCliente, direccion, telefono)){
             mostrarMensaje("Notificaión","El cliente se ha añadido","El cliente se añadió correctamente");
         };
     }
-    private boolean datosValidos(String nombre, String apellidos, String idCliente, String direccion, int telefono) {
+    private boolean datosValidos(String nombre, String apellidos, String idCliente, String direccion, String telefono) {
         String notificacion = "";
         if (nombre == null || nombre.equals("")) {
             notificacion += "Nombre no puede estar vacío\n";
@@ -298,7 +298,7 @@ public class AlmacenController implements Initializable {
     void actualizarCliente(ActionEvent event) {
         String nombre = txtNombreCliente.getText();
         String apellidos = txtApellidoCliente.getText();
-        int telefono = Integer.parseInt(this.txtTelefono.getText());
+        String telefono = txtTelefono.getText();
         String cedula = txtCedula.getText();
         String direccion = txtDireccion.getText();
 

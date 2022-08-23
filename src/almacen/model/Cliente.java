@@ -6,9 +6,9 @@ public class Cliente {
     private String apellidos;
     private String cedula;
     private String direccion;
-    private int telefono;
+    private String telefono;
 
-    public Cliente(String nombre, String apellidos, String cedula, String direccion, int telefono) {
+    public Cliente(String nombre, String apellidos, String cedula, String direccion, String telefono) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.cedula = cedula;
@@ -32,7 +32,7 @@ public class Cliente {
         return direccion;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
@@ -52,7 +52,7 @@ public class Cliente {
         this.direccion = direccion;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
     
