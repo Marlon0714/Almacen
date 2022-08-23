@@ -409,11 +409,16 @@ public class AlmacenController implements Initializable {
     }
     @FXML
     void nuevoCliente(ActionEvent event){
-        txtNombreCliente.setText("Ingrese el nombre del cliente");
-        txtApellidoCliente.setText("Apellidos del cliente");
-        txtCedula.setText("Cedula del cliente");
-        txtTelefono.setText("Telefono del cliente");
-        txtDireccion.setText("Direccion del cliente");
+        txtNombreCliente.setText("");
+        txtApellidoCliente.setText("");
+        txtCedula.setText("");
+        txtTelefono.setText("");
+        txtDireccion.setText("");
+        txtNombreCliente.setPromptText("Ingrese el nombre del cliente");
+        txtApellidoCliente.setPromptText("Apellidos del cliente");
+        txtCedula.setPromptText("Cedula del cliente");
+        txtTelefono.setPromptText("Telefono del cliente");
+        txtDireccion.setPromptText("Direccion del cliente");
         txtCedula.setDisable(false);
     }
     @FXML
