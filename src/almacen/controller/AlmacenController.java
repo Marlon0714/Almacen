@@ -540,6 +540,7 @@ public class AlmacenController implements Initializable {
         txtTelefono.setPromptText("Telefono del cliente");
         txtDireccion.setPromptText("Direccion del cliente");
         txtCedula.setDisable(false);
+        mnBtnTipoProducto.setDisable(false);
     }
     @FXML
     void nuevoProducto(ActionEvent event){
