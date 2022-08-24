@@ -402,6 +402,22 @@ public class AlmacenController implements Initializable {
     @FXML
     private MenuButton mnBtnTipoProducto;
 
+    @FXML
+    void agregarProducto(ActionEvent event) {
+        String nombreProducto = txtNombreProducto.getText();
+        String codigoProducto = txtCodigoProducto.getText();
+        String descripcion = txtDescripcionProducto.getText();
+        double valorUnitario =Double.parseDouble(txtValorProducto.getText());
+        String existencias = txtExistenciasProducto.getText();
+
+        if(datosValidosProducto(nombreProducto, codigoProducto, descripcion, valorUnitario, existencias) == true){
+            listaProductos.add(new Producto(nombreProducto, codigoProducto, descripcion, valorUnitario, existencias));
+            mostrarMensaje("Notificaión","El producto se ha añadido","El producto se añadió correctamente");
+            aplicacion.añadirProducto(nombreProducto, codigoProducto, descripcion, valorUnitario, existencias);
+            this.aplicacion.añadirProducto(nombreProducto, codigoProducto, descripcion, valorUnitario, existencias);
+        }
+
+    }
 
     @FXML
     void agregarCliente(ActionEvent event) {
@@ -495,21 +511,7 @@ public class AlmacenController implements Initializable {
 
         return false;
     }
-    @FXML
-    void agregarProducto(ActionEvent event) {
-        String nombreProducto = txtNombreProducto.getText();
-        String codigoProducto = txtCodigoProducto.getText();
-        String descripcion = txtDescripcionProducto.getText();
-        double valorUnitario =Double.parseDouble(txtValorProducto.getText());
-        String existencias = txtExistenciasProducto.getText();
 
-        if(datosValidosProducto(nombreProducto, codigoProducto, descripcion, valorUnitario, existencias) == true){
-            listaProductos.add(new Producto(nombreProducto, codigoProducto, descripcion, valorUnitario, existencias));
-            aplicacion.añadirProducto(nombreProducto, codigoProducto, descripcion, valorUnitario, existencias);
-            this.aplicacion.añadirProducto(nombreProducto, codigoProducto, descripcion, valorUnitario, existencias);
-        }
-
-    }
     private void mostrarMensaje(String titulo,String header,String contenido)  {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle(titulo);
@@ -557,7 +559,7 @@ public class AlmacenController implements Initializable {
             productoSeleccion.setDescripcion(descripcion);
             productoSeleccion.setValorUnitario(valorUnitario);
             productoSeleccion.setExistente(existencias);
-            mostrarMensaje("Notificación", "Cliente Actualizado", "El cliente se actualizó correctamente");
+            mostrarMensaje("Notificación", "Producto Actualizado", "El producto se actualizó correctamente");
         
             tableViewProductos.refresh();
         }
@@ -834,6 +836,7 @@ public class AlmacenController implements Initializable {
             mostrarMensaje("Notificación","Error","No se ha seleccionado ninguna Venta");
         }
     }
+
 
 
 }
