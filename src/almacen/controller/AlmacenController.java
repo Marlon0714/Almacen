@@ -20,6 +20,7 @@ import almacen.aplication.Aplicacion;
 import almacen.model.Almacen;
 import almacen.model.Cliente;
 import almacen.model.Factura;
+import almacen.model.Producto;
 import almacen.model.Venta;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -41,6 +42,7 @@ public class AlmacenController implements Initializable {
     ObservableList<Venta> listaVentas = FXCollections.observableArrayList();
     ObservableList<Venta> listaDetallesFactura = FXCollections.observableArrayList();
     ObservableList<Factura> listaFacturas = FXCollections.observableArrayList();
+    ObservableList<Producto> listaProductos = FXCollections.observableArrayList();
 
     /**
      * Initializes the controller class.
@@ -67,6 +69,23 @@ public class AlmacenController implements Initializable {
         this.columnValorUVenta.setCellValueFactory(new PropertyValueFactory<>("valorU"));
         this.columnSubTotalVenta.setCellValueFactory(new PropertyValueFactory<>("subTotal"));
 
+        this.columnNombreProducto.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        this.columnCodigo.setCellValueFactory(new PropertyValueFactory<>("CodigoProducto"));
+        this.columnDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+        this.columnValorUnit.setCellValueFactory(new PropertyValueFactory<>("valorUnitario"));
+        this.columnExistencias.setCellValueFactory(new PropertyValueFactory<>("existente"));
+
+        this.tableViewProductos.setItems(listaProductos);
+        tableViewProductos.getSelectionModel().selectedItemProperty().addListener((obs,oldSelection,newSelection) -> {
+            if (newSelection != null) {
+                productoSeleccion = newSelection;
+                mostrarInformacionProducto();
+                return;
+            }
+
+        });
+
+
 
 
         this.tableViewClientes.setItems(listaClientes);
@@ -77,7 +96,7 @@ public class AlmacenController implements Initializable {
         tableViewClientes.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
         if(newSelection != null){
             clienteSeleccion = newSelection;
-            mostarInformacion();
+            mostrarInformacion();
             }
         });
 
@@ -93,7 +112,8 @@ public class AlmacenController implements Initializable {
         txtCantidadProducto.setDisable(true);
 
     }
-    private void mostarInformacion() {
+
+    private void mostrarInformacion() {
         if(clienteSeleccion != null){
             txtNombreCliente.setText(clienteSeleccion.getNombre());
             txtApellidoCliente.setText(clienteSeleccion.getApellido());
@@ -101,17 +121,25 @@ public class AlmacenController implements Initializable {
             txtTelefono.setText(clienteSeleccion.getTelefono());
             txtDireccion.setText(clienteSeleccion.getDireccion());
             txtCedula.setDisable(true);
-            mnBtnTipoPersona.setDisable(true);
             mnBtnTipoPersona.setText("Tipo de Persona");
+            mnBtnTipoPersona.setDisable(true);
             txtEmail.setVisible(false);
             dateFechaNacimiento.setVisible(false);
             txtidTributaria.setVisible(false);
             txtNitCliente.setVisible(false);
+        }}
+    private void mostrarInformacionProducto(){
+        if(productoSeleccion != null){
+            txtNombreProducto.setText(productoSeleccion.getNombre());
+            txtCodigoProducto.setText(productoSeleccion.getCodigoProducto());
+            txtDescripcionProducto.setText(productoSeleccion.getDescripcion());
+            txtValorProducto.setText(Double.toString(productoSeleccion.getValorUnitario()));
+            txtExistenciasProducto.setText(productoSeleccion.getExistente());
+            txtCodigoProducto.setDisable(true);
         }
-
-        }
+    }
     
-    
+    private Producto productoSeleccion;
     private Cliente clienteSeleccion;
     public void setAplicacion(Aplicacion aplicacion) {
         this.aplicacion = aplicacion;
@@ -120,13 +148,20 @@ public class AlmacenController implements Initializable {
         tableViewClientes.getItems().clear();
         tableViewClientes.setItems(getClientes());
 
+        tableViewProductos.getItems().clear();
+        tableViewProductos.setItems(getProductos());
+
     }
 
     private ObservableList<Cliente> getClientes() {
         listaClientes.addAll(almacen.getClientes());
         return listaClientes;
     }
+    private ObservableList<Producto> getProductos() {
+        listaProductos.addAll(almacen.getProductos());
+        return listaProductos;
 
+    }
     @FXML
     private Button btnActualizarCliente;
 
@@ -195,6 +230,24 @@ public class AlmacenController implements Initializable {
 
     @FXML
     private TableColumn<Cliente, String> columnDireccion;
+
+    @FXML
+    private TableView<Producto>tableViewProductos;
+
+    @FXML
+    private TableColumn<Producto,String> columnNombreProducto;
+
+    @FXML
+    private TableColumn<Producto, String> columnCodigo;
+
+    @FXML
+    private TableColumn<Producto,String> columnDescripcion;
+
+    @FXML
+    private TableColumn<Producto,String> columnValorUnit;
+
+    @FXML
+    private TableColumn<Producto,String> columnExistencias;
 
     @FXML
     private TableView<Cliente> tableViewClientes;
@@ -329,17 +382,6 @@ public class AlmacenController implements Initializable {
 
 
     @FXML
-    void nuevoProducto(ActionEvent event) {
-
-    }
-
-
-    @FXML
-    void actualizarProducto(ActionEvent event) {
-
-    }
-
-    @FXML
     void agregarCliente(ActionEvent event) {
 
         String nombre = txtNombreCliente.getText();
@@ -370,7 +412,37 @@ public class AlmacenController implements Initializable {
             this.aplicacion.añadirCliente(nombre, apellido, cedula,direccion, telefono, email, fechaNacimiento, idTributaria, nit);
         }
     }
-
+    private boolean datosValidosProducto(String nombreProducto, String codigoProducto, String descripcion, double valorUnitario, String existencias){
+        int n = 0;
+        if (nombreProducto == null || nombreProducto.equals("")){
+            mostrarMensaje("Notificación", "Error", "Informacion inválida");
+            n ++;
+            return false;
+        }
+        if (codigoProducto == null || codigoProducto.equals("")){
+            mostrarMensaje("Notificación", "Error", "Informacion inválida");
+            n++;
+            return false;
+        }
+        if (descripcion == null || descripcion.equals("")){
+            mostrarMensaje("Notificación", "Error", "Informacion inválida");
+            n++;
+            return false;
+        }
+        if (valorUnitario == 0.0){
+            mostrarMensaje("Notificación", "Error", "Informacion inválida");
+            n++;
+            return false;
+        }
+        if (existencias == null || existencias.equals("")) {
+            mostrarMensaje("Notificación", "Error", "Informacion inválida");
+            n++;
+            return false;}
+        if (n == 0) {
+            return true;
+        }
+        return false;
+    }
     private boolean datosValidos(String nombre, String apellidos, String idCliente, String direccion, String telefono) {
         String notificacion = "";
         if (nombre == null || nombre.equals("")) {
@@ -435,10 +507,26 @@ public class AlmacenController implements Initializable {
         }
     }
     @FXML
-    void agregarProducto(ActionEvent event) {
-        
-    }
+    void actualizarProducto(ActionEvent event) {
+        String nombreProducto = txtNombreProducto.getText();
+        String codigoProducto = txtCodigoProducto.getText();
+        String descripcion = txtDescripcionProducto.getText();
+        double valorUnitario =Double.parseDouble(txtValorProducto.getText());
+        String existencias = txtExistenciasProducto.getText();
 
+        if(datosValidosProducto(nombreProducto, codigoProducto, descripcion, valorUnitario, existencias) == true){
+            aplicacion.actualizarProducto(nombreProducto, codigoProducto, descripcion, valorUnitario, existencias);
+            productoSeleccion.setNombre(nombreProducto);
+            productoSeleccion.setCodigoProducto(codigoProducto);
+            productoSeleccion.setDescripcion(descripcion);
+            productoSeleccion.setValorUnitario(valorUnitario);
+            productoSeleccion.setExistente(existencias);
+            mostrarMensaje("Notificación", "Cliente Actualizado", "El cliente se actualizó correctamente");
+        
+            tableViewProductos.refresh();
+        }
+
+    }
     @FXML
     void eliminarCliente(ActionEvent event) {
         if(clienteSeleccion != null){
@@ -457,7 +545,16 @@ public class AlmacenController implements Initializable {
 
     @FXML
     void eliminarProducto(ActionEvent event) {
+        if(productoSeleccion != null){
+            listaProductos.remove(productoSeleccion);
+            if(aplicacion.eliminarProducto(productoSeleccion.getCodigoProducto())){
+                mostrarMensaje("Notificación","Error", "No se ha seleccionado ningún producto");
 
+            }else{
+                mostrarMensaje("Notificación","El producto se ha eliminado","El producto se eliminó correctamente");
+
+            }
+        }
     }
 
 
@@ -523,8 +620,23 @@ public class AlmacenController implements Initializable {
         txtTelefono.setPromptText("Telefono del cliente");
         txtDireccion.setPromptText("Direccion del cliente");
         txtCedula.setDisable(false);
-        mnBtnTipoPersona.setDisable(false);
     }
+    @FXML
+    void nuevoProducto(ActionEvent event){
+        txtNombreProducto.setText("");
+        txtCodigoProducto.setText("");
+        txtDescripcionProducto.setText("");
+        txtValorProducto.setText("");
+        txtExistenciasProducto.setText("");
+
+        txtNombreProducto.setPromptText("Ingrese el nombre del producto");
+        txtCodigoProducto.setPromptText("Ingrese el código del producto");
+        txtDescripcionProducto.setPromptText("Ingrese el descripcion del producto");
+        txtValorProducto.setPromptText("Ingrese el valor del producto");
+        txtExistenciasProducto.setPromptText("Ingrese el existencias del producto");
+        txtCodigoProducto.setDisable(false);
+    }
+
     @FXML
     void selectProductoEnvasado(ActionEvent event) {
         mnBtnTipoProducto.setText(itemProductoEnvasado.getText());
