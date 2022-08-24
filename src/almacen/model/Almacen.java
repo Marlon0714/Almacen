@@ -123,8 +123,12 @@ public class Almacen {
                     flagEncontrado = true;
                 }
             }
-            posicion = -1;
-        }while(flagEncontrado == false && posicion == 0);
+            if(flagEncontrado == false){
+                posicion = -1;
+                
+            }
+            
+        }while(flagEncontrado == false);
     return posicion;
     }
     public int obtenerPosicionProducto(String codigoProducto){
@@ -136,7 +140,10 @@ public class Almacen {
                     pos = i;
                     flagEncontrado = true;
                 }
+            }
+            if(flagEncontrado == false){
                 pos = -1;
+                
             }
         }while(flagEncontrado == false && pos == 0);
         return pos;

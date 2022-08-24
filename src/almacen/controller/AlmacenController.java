@@ -63,10 +63,8 @@ public class AlmacenController implements Initializable {
         this.columnIvaFactura.setCellValueFactory(new PropertyValueFactory<>("iva"));
         this.columnTotalFactura.setCellValueFactory(new PropertyValueFactory<>("total"));
 
-        this.columnCodigoVenta.setCellValueFactory(new PropertyValueFactory<>("codigo"));
-        this.columnNombreVenta.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-        this.columnCantidadVenta.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
-        this.columnValorUVenta.setCellValueFactory(new PropertyValueFactory<>("valorU"));
+        this.columnNombreVenta.setCellValueFactory(new PropertyValueFactory<>("nombreProducto"));
+        this.columnCantidadVenta.setCellValueFactory(new PropertyValueFactory<>("cantidadProducto"));
         this.columnSubTotalVenta.setCellValueFactory(new PropertyValueFactory<>("subTotal"));
 
         this.columnNombreProducto.setCellValueFactory(new PropertyValueFactory<>("nombre"));
@@ -379,6 +377,22 @@ public class AlmacenController implements Initializable {
 
     @FXML
     private MenuButton mnBtnTipoProducto;
+
+    @FXML
+    void agregarProducto(ActionEvent event) {
+        String nombreProducto = txtNombreProducto.getText();
+        String codigoProducto = txtCodigoProducto.getText();
+        String descripcion = txtDescripcionProducto.getText();
+        double valorUnitario =Double.parseDouble(txtValorProducto.getText());
+        String existencias = txtExistenciasProducto.getText();
+
+        if(datosValidosProducto(nombreProducto, codigoProducto, descripcion, valorUnitario, existencias) == true){
+            listaProductos.add(new Producto(nombreProducto, codigoProducto, descripcion, valorUnitario, existencias));
+            aplicacion.añadirProducto(nombreProducto, codigoProducto, descripcion, valorUnitario, existencias);
+            this.aplicacion.añadirProducto(nombreProducto, codigoProducto, descripcion, valorUnitario, existencias);
+        }
+
+    }
 
 
     @FXML
@@ -711,9 +725,9 @@ public class AlmacenController implements Initializable {
             int pos = almacen.obtenerPosicionProducto(codigo);
             if(pos != -1){
                 
-                //Venta venta = new Venta(listaProductos.get(pos), txtCantidadProducto.getText());
+                Venta venta = new Venta(listaProductos.get(pos), Integer.parseInt(txtCantidadProducto.getText()));
 
-               //listaVentas.add(venta);
+                listaVentas.add(venta);
                 tableViewDetalles.refresh();
             }else{
                 mostrarMensaje("Notificación","Error","No se ha encontrado ningún Producto");
