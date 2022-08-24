@@ -1,8 +1,11 @@
 
 package almacen.aplication;
 
+import java.util.ArrayList;
+
 import almacen.controller.AlmacenController;
 import almacen.model.Almacen;
+import almacen.model.Venta;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -94,6 +97,11 @@ public class Aplicacion extends Application {
     public void actualizarProducto(String nombreProducto, String codigoProducto, String descripcion,double valorUnitario, String existencias) {
         almacen.modificarProducto(nombreProducto,codigoProducto,descripcion,valorUnitario,existencias);
 
+    }
+
+    public void añadirFactura(int codigo, String fecha, String cliente, int i, ArrayList<Venta> ventas, double total) {
+
+        almacen.añadirFactura(codigo, fecha ,cliente , 19, ventas, total);
     }
     
 }

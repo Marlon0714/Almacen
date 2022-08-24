@@ -187,7 +187,7 @@
                               </AnchorPane>
                            </items>
                         </SplitPane>
-                        <Button layoutX="14.0" layoutY="463.0" mnemonicParsing="false" onAction="#eliminarProducto" text="Eliminar" />
+                        <Button layoutX="14.0" layoutY="463.0" mnemonicParsing="false" onAction="#eliminarVenta" text="Eliminar" />
                      </children>
                   </AnchorPane>
                </content>
@@ -196,57 +196,42 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <SplitPane dividerPositions="0.4819672131147541, 0.5" orientation="VERTICAL" prefHeight="489.0" prefWidth="602.0">
-                          <items>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                                 <children>
-                                    <SplitPane dividerPositions="0.27330226364846866" layoutX="-1.0" layoutY="-1.0" prefHeight="286.0" prefWidth="602.0">
-                                      <items>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                        <SplitPane orientation="VERTICAL" prefHeight="489.0" prefWidth="602.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <SplitPane dividerPositions="0.27330226364846866" layoutX="-1.0" layoutY="-1.0" prefHeight="494.0" prefWidth="602.0">
+                                <items>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                       <children>
+                                          <Separator layoutX="-1.0" layoutY="27.0" prefHeight="10.0" prefWidth="242.0" />
+                                          <Label layoutX="14.0" layoutY="5.0" prefHeight="18.0" prefWidth="146.0" text="Buscar Factura" />
+                                          <TextField layoutX="14.0" layoutY="49.0" prefHeight="26.0" prefWidth="142.0" promptText="Codigo de la Factura" />
+                                          <Button layoutX="14.0" layoutY="91.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="96.0" text="Buscar" />
+                                       </children>
+                                    </AnchorPane>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="338.0" prefWidth="506.0">
+                                       <children>
+                                          <Separator layoutY="26.0" prefHeight="10.0" prefWidth="434.0" />
+                                          <Label layoutX="14.0" layoutY="5.0" prefHeight="18.0" prefWidth="146.0" text="Informacion de la Factura" />
+                                          <Pane layoutY="31.0" prefHeight="209.0" prefWidth="434.0">
                                              <children>
-                                                <Separator layoutX="-1.0" layoutY="27.0" prefHeight="10.0" prefWidth="242.0" />
-                                                <Label layoutX="14.0" layoutY="5.0" prefHeight="18.0" prefWidth="146.0" text="Buscar Factura" />
-                                                <TextField layoutX="14.0" layoutY="49.0" prefHeight="26.0" prefWidth="142.0" promptText="Codigo de la Factura" />
-                                                <Button layoutX="14.0" layoutY="91.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="96.0" text="Buscar" />
+                                                <TableView fx:id="tableViewFacturas" layoutX="-1.0" prefHeight="460.0" prefWidth="434.0">
+                                                   <columns>
+                                                      <TableColumn fx:id="columnCodigoFactura" prefWidth="58.39996337890625" text="Código" />
+                                                      <TableColumn fx:id="columnFechaFactura" prefWidth="74.39996337890625" text="Fecha" />
+                                                      <TableColumn fx:id="columnClienteFactura" prefWidth="189.60003662109375" text="Cliente" />
+                                                      <TableColumn fx:id="columnIvaFactura" prefWidth="35.20001220703125" text="Iva" />
+                                                      <TableColumn fx:id="columnTotalFactura" prefWidth="77.5999755859375" text="Total" />
+                                                   </columns>
+                                                </TableView>
                                              </children>
-                                          </AnchorPane>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="242.0" prefWidth="355.0">
-                                             <children>
-                                                <Separator layoutY="26.0" prefHeight="10.0" prefWidth="434.0" />
-                                                <Label layoutX="14.0" layoutY="5.0" prefHeight="18.0" prefWidth="146.0" text="Informacion de la Factura" />
-                                                <Pane layoutY="31.0" prefHeight="209.0" prefWidth="434.0">
-                                                   <children>
-                                                      <TableView fx:id="tableViewFacturas" layoutX="-1.0" prefHeight="219.0" prefWidth="434.0">
-                                                         <columns>
-                                                            <TableColumn fx:id="columnCodigoFactura" prefWidth="58.39996337890625" text="Código" />
-                                                            <TableColumn fx:id="columnFechaFactura" prefWidth="74.39996337890625" text="Fecha" />
-                                                            <TableColumn fx:id="columnClienteFactura" prefWidth="189.60003662109375" text="Cliente" />
-                                                            <TableColumn fx:id="columnIvaFactura" prefWidth="35.20001220703125" text="Iva" />
-                                                            <TableColumn fx:id="columnTotalFactura" prefWidth="77.5999755859375" text="Total" />
-                                                         </columns>
-                                                      </TableView>
-                                                   </children>
-                                                </Pane>
-                                             </children>
-                                          </AnchorPane>
-                                      </items>
-                                    </SplitPane>
-                                 </children>
-                              </AnchorPane>
-                              <Label prefHeight="18.0" prefWidth="146.0" text="Detalles de la Factura">
-                                 <padding>
-                                    <Insets bottom="5.0" top="5.0" />
-                                 </padding>
-                              </Label>
-                              <TableView fx:id="tableViewDetallesFactura" prefHeight="214.0" prefWidth="602.0">
-                                 <columns>
-                                    <TableColumn prefWidth="337.5999755740166" text="Nombre del Producto" />
-                                    <TableColumn prefWidth="136.800048828125" text="Cantidad" />
-                                    <TableColumn prefWidth="128.79998779296875" text="SubTotal" />
-                                 </columns>
-                              </TableView>
-                          </items>
-                        </SplitPane>
+                                          </Pane>
+                                       </children>
+                                    </AnchorPane>
+                                </items>
+                              </SplitPane>
+                           </children>
+                        </AnchorPane>
                      </children>
                   </AnchorPane>
               </content>

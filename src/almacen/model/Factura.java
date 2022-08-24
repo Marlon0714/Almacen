@@ -15,12 +15,13 @@ public class Factura {
     private double total;
     private ArrayList<Venta> detallesFactura = new ArrayList<>();
 
-    public Factura(int codigoFactura, String fechaFactura, String cliente, float iva, ArrayList<Venta> detallesFactura) {
+    public Factura(int codigoFactura, String fechaFactura, String cliente, float iva, ArrayList<Venta> detallesFactura, double total) {
         this.codigoFactura = codigoFactura;
         this.fechaFactura = fechaFactura;
         this.cliente = cliente;
         this.iva = iva;
         this.detallesFactura = detallesFactura;
+        this.total = total;
     }
 
     public int getCodigoFactura() {

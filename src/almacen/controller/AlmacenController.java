@@ -6,6 +6,7 @@ package almacen.controller;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javax.management.Notification;
 import javafx.fxml.FXML;
@@ -40,7 +41,6 @@ public class AlmacenController implements Initializable {
     private Almacen almacen;
     ObservableList<Cliente> listaClientes = FXCollections.observableArrayList();
     ObservableList<Venta> listaVentas = FXCollections.observableArrayList();
-    ObservableList<Venta> listaDetallesFactura = FXCollections.observableArrayList();
     ObservableList<Factura> listaFacturas = FXCollections.observableArrayList();
     ObservableList<Producto> listaProductos = FXCollections.observableArrayList();
 
@@ -77,7 +77,6 @@ public class AlmacenController implements Initializable {
         tableViewProductos.getSelectionModel().selectedItemProperty().addListener((obs,oldSelection,newSelection) -> {
             if (newSelection != null) {
                 productoSeleccion = newSelection;
-                mostrarInformacionProducto();
                 return;
             }
 
@@ -89,7 +88,6 @@ public class AlmacenController implements Initializable {
         this.tableViewClientes.setItems(listaClientes);
         this.tableViewFacturas.setItems(listaFacturas);
         this.tableViewDetalles.setItems(listaVentas);
-        this.tableViewDetallesFactura.setItems(listaDetallesFactura);
 
         tableViewClientes.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
         if(newSelection != null){
@@ -98,10 +96,17 @@ public class AlmacenController implements Initializable {
             }
         });
 
+        tableViewDetalles.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if(newSelection != null){
+                detalleSeleccion = newSelection;
+                mostrarInformacion();
+                }
+            });
+
         tableViewFacturas.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if(newSelection != null){
-                //facturaSeleccion = newSelection;
-                //mostarInformacionFactura();
+                facturaSeleccion = newSelection;
+                //mostrarInformacionFactura();
                 }
             });
 
@@ -139,6 +144,12 @@ public class AlmacenController implements Initializable {
     
     private Producto productoSeleccion;
     private Cliente clienteSeleccion;
+    private Venta detalleSeleccion;
+    private Factura facturaSeleccion;
+    
+
+
+
     public void setAplicacion(Aplicacion aplicacion) {
         this.aplicacion = aplicacion;
         this.almacen = aplicacion.getAlmacen();
@@ -148,6 +159,12 @@ public class AlmacenController implements Initializable {
 
         tableViewProductos.getItems().clear();
         tableViewProductos.setItems(getProductos());
+
+        tableViewFacturas.getItems().clear();
+        tableViewFacturas.setItems(getFacturas());
+        
+        tableViewDetalles.getItems().clear();
+        
 
     }
 
@@ -160,6 +177,13 @@ public class AlmacenController implements Initializable {
         return listaProductos;
 
     }
+
+    private ObservableList<Factura> getFacturas() {
+        listaFacturas.addAll(almacen.getFacturas());
+        return listaFacturas;
+
+    }
+
     @FXML
     private Button btnActualizarCliente;
 
@@ -377,22 +401,6 @@ public class AlmacenController implements Initializable {
 
     @FXML
     private MenuButton mnBtnTipoProducto;
-
-    @FXML
-    void agregarProducto(ActionEvent event) {
-        String nombreProducto = txtNombreProducto.getText();
-        String codigoProducto = txtCodigoProducto.getText();
-        String descripcion = txtDescripcionProducto.getText();
-        double valorUnitario =Double.parseDouble(txtValorProducto.getText());
-        String existencias = txtExistenciasProducto.getText();
-
-        if(datosValidosProducto(nombreProducto, codigoProducto, descripcion, valorUnitario, existencias) == true){
-            listaProductos.add(new Producto(nombreProducto, codigoProducto, descripcion, valorUnitario, existencias));
-            aplicacion.añadirProducto(nombreProducto, codigoProducto, descripcion, valorUnitario, existencias);
-            this.aplicacion.añadirProducto(nombreProducto, codigoProducto, descripcion, valorUnitario, existencias);
-        }
-
-    }
 
 
     @FXML
@@ -708,8 +716,25 @@ public class AlmacenController implements Initializable {
         mnBtnPaisOrigen.setText(itemPeru.getText());
     }
 
+    ArrayList<Venta> ventas;
     @FXML
     void crearFactura(ActionEvent event) {
+
+        int codigo = Integer.parseInt(txtCodigoFactura.getText());
+        String fecha = txtFechaFactura.getText();
+        String cliente = txtClienteFactura.getText();
+        double total = Double.parseDouble(txtTotal.getText());
+
+        Factura factura = new Factura(codigo, fecha ,cliente , 19, ventas, total);
+        aplicacion.añadirFactura(codigo, fecha ,cliente , 19, ventas, total);
+        this.aplicacion.añadirFactura(codigo, fecha ,cliente , 19, ventas, total);
+
+        listaFacturas.add(factura);
+
+        mostrarMensaje("Notificación","La Factura ha sido creada","Factura registrada exitosamente");
+        listaVentas.removeAll(listaVentas);
+        tableViewDetalles.setItems(listaVentas);
+        tableViewDetalles.refresh();
 
     }
 
@@ -720,12 +745,29 @@ public class AlmacenController implements Initializable {
         //settear Iva
         txtIva.setText("19");
         //settear codigo
-        txtCodigoFactura.setText("123456");
+        txtCodigoFactura.setText(obtenerCodigoFactura());
         //habilitar campos
         txtClienteABuscar.setDisable(false);
         txtProductoABuscar.setDisable(false);
         txtCantidadProducto.setDisable(false);
 
+        txtClienteFactura.setText("");
+        txtTotal.setText("");
+        listaVentas.removeAll(listaVentas);
+
+    }
+
+    private String obtenerCodigoFactura() {
+        String codigo;
+
+        int n = 0;
+
+        n += (int)(Math.random()*10);
+        n += (int)(Math.random()*10);
+
+        codigo = "00" + n;
+
+        return codigo;
     }
 
     @FXML
@@ -742,6 +784,7 @@ public class AlmacenController implements Initializable {
                 Venta venta = new Venta(listaProductos.get(pos), Integer.parseInt(txtCantidadProducto.getText()));
 
                 listaVentas.add(venta);
+                txtTotal.setText(Double.toString(calcularTotalFactura(listaVentas)));
                 tableViewDetalles.refresh();
             }else{
                 mostrarMensaje("Notificación","Error","No se ha encontrado ningún Producto");
@@ -751,6 +794,15 @@ public class AlmacenController implements Initializable {
         
         }
         
+    }
+
+    private double calcularTotalFactura(ObservableList<Venta> listaVentas) {
+            double total = 0;
+        for(int i = 0; i < listaVentas.size(); i++) {
+            total += listaVentas.get(i).getSubTotal();
+        }
+        total += total*0.19;
+        return total;
     }
 
     @FXML
@@ -772,5 +824,16 @@ public class AlmacenController implements Initializable {
         }
 
     }
+
+    @FXML
+    void eliminarVenta(ActionEvent event) {
+        if(detalleSeleccion != null){
+            listaVentas.remove(detalleSeleccion);
+            txtTotal.setText(Double.toString(calcularTotalFactura(listaVentas)));
+        }else{
+            mostrarMensaje("Notificación","Error","No se ha seleccionado ninguna Venta");
+        }
+    }
+
 
 }

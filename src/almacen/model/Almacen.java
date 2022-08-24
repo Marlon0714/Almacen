@@ -3,6 +3,7 @@ package almacen.model;
 
 
 import java.util.ArrayList;
+import java.util.function.DoubleBinaryOperator;
 
 public class Almacen {
     
@@ -27,10 +28,10 @@ public class Almacen {
         //Crear dos perecederos, dos refirgerados y dos envasados
         Producto perecedero1 = new Producto("Perecedero 2", "1", "Perecedero 1", 100.0, "10");
         Producto perecedero2 = new Producto("Perecedero 1", "2", "Perecedero 2", 200.0, "20");
-        Producto refrigerado1 = new Producto("Refrigerado 1", "12", "Refrigerado 1", 300.0, "30");
-        Producto refrigerado2 = new Producto("Refirgerado 2", "2", "Refrigerado 2", 400.0, "40");
-        Producto envasado1 = new Producto("Envasado 1", "1", "Envasado 1", 500.0, "50");
-        Producto envasado2 = new Producto("Envasado 2", "2", "Envasado 2", 600.0, "60");
+        Producto refrigerado1 = new Producto("Refrigerado 1", "6", "Refrigerado 1", 300.0, "30");
+        Producto refrigerado2 = new Producto("Refirgerado 2", "3", "Refrigerado 2", 400.0, "40");
+        Producto envasado1 = new Producto("Envasado 1", "4", "Envasado 1", 500.0, "50");
+        Producto envasado2 = new Producto("Envasado 2", "5", "Envasado 2", 600.0, "60");
         //Agregar productos al almacen
         productos.add(perecedero1);
         productos.add(perecedero2);
@@ -173,9 +174,9 @@ public class Almacen {
         return flagEliminado;
     }
 
-    public void agregarVenta(Producto producto, int cantidadProducto){
-        
-        
+    public void añadirFactura(int codigo, String fecha, String cliente, int i, ArrayList<Venta> ventas, double total) {
+        Factura factura = new Factura(codigo, fecha ,cliente , 19, ventas, total);
+        facturas.add(factura);
     }
 
 }
