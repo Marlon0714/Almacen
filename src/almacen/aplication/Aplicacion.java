@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 public class Aplicacion extends Application {
     
 	private Stage primaryStage;
-        private Almacen almacen = new Almacen(null, null);
+    private Almacen almacen = new Almacen(null, null);
         
 
 	@Override
@@ -81,7 +81,7 @@ public class Aplicacion extends Application {
     public void actualizarCliente(String nombre, String apellidos, String cedula, String direccion, String telefono) {
         almacen.modificarCliente(nombre,apellidos,cedula, direccion, telefono);
     }
-
+    
     public void añadirProducto(String nombreProducto, String codigoProducto, String descripcion,double valorUnitario, String existencias) {
         almacen.añadirProducto(nombreProducto,codigoProducto,descripcion,valorUnitario,existencias);
     }

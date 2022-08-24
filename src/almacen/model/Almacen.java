@@ -124,7 +124,7 @@ public class Almacen {
                 }
             }
         }while(flagEncontrado == false);
-     return posicion;
+    return posicion;
     }
     public int obtenerPosicionProducto(String codigoProducto){
         int pos = 0;

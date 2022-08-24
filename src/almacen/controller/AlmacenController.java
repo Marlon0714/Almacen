@@ -4,7 +4,9 @@
  */
 package almacen.controller;
 import java.net.URL;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import javax.management.Notification;
@@ -20,7 +22,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import almacen.aplication.Aplicacion;
 import almacen.model.Almacen;
 import almacen.model.Cliente;
+import almacen.model.Factura;
 import almacen.model.Producto;
+import almacen.model.Venta;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -78,6 +82,11 @@ public class AlmacenController implements Initializable {
             mostrarInformacion();
             }
         });
+
+        txtClienteABuscar.setDisable(true);
+        txtProductoABuscar.setDisable(true);
+        txtCantidadProducto.setDisable(true);
+
     }
 
     private void mostrarInformacion() {
@@ -154,6 +163,39 @@ public class AlmacenController implements Initializable {
     private Button btnNuevoProducto;
 
     @FXML
+    private TableColumn<Cliente, String> columnNombre;
+
+    @FXML
+    private TableColumn<Venta, String> columnCantidadVenta;
+
+    @FXML
+    private TableColumn<Venta, String> columnNombreVenta;
+
+    @FXML
+    private TableColumn<Venta, String> columnSubTotalVenta;
+
+    @FXML
+    private TableColumn<Venta, String> columnValorUVenta;
+
+    @FXML
+    private TableColumn<Venta, String> columnCodigoVenta;
+
+    @FXML
+    private TableColumn<Venta, String> columnDescripcionVenta;
+
+    @FXML
+    private TableColumn<Cliente, String> columnApellido;
+
+    @FXML
+    private TableColumn<Cliente, String> columnTelefono;
+
+    @FXML
+    private TableColumn<Cliente, String> columnId;
+
+    @FXML
+    private TableColumn<Cliente, String> columnDireccion;
+
+    @FXML
     private TableView<Producto>tableViewProductos;
 
     @FXML
@@ -172,23 +214,40 @@ public class AlmacenController implements Initializable {
     private TableColumn<Producto,String> columnExistencias;
 
     @FXML
-    private TableColumn<Cliente, String> columnNombre;
-
-
-    @FXML
-    private TableColumn<Cliente, String> columnApellido;
-
-    @FXML
-    private TableColumn<Cliente, String> columnTelefono;
-
-    @FXML
-    private TableColumn<Cliente, String> columnId;
-
-    @FXML
-    private TableColumn<Cliente, String> columnDireccion;
-
-    @FXML
     private TableView<Cliente> tableViewClientes;
+
+    @FXML
+    private TableView<Venta> tableViewDetalles;
+
+    @FXML
+    private TableView<Venta> tableViewDetallesFactura;
+
+    @FXML
+    private TableView<Factura> tableViewFacturas;
+
+    @FXML
+    private TextField txtCantidadProducto;
+
+    @FXML
+    private TextField txtClienteABuscar;
+
+    @FXML
+    private TextField txtClienteFactura;
+
+    @FXML
+    private TextField txtCodigoFactura;
+
+    @FXML
+    private TextField txtFechaFactura;
+
+    @FXML
+    private TextField txtIva;
+
+    @FXML
+    private TextField txtProductoABuscar;
+
+    @FXML
+    private TextField txtTotal;
 
     @FXML
     private TextField txtApellidoCliente;
@@ -285,21 +344,11 @@ public class AlmacenController implements Initializable {
     @FXML
     private MenuButton mnBtnTipoProducto;
 
-    @FXML
-    void agregarProducto(ActionEvent event) {
-        String nombreProducto = txtNombreProducto.getText();
-        String codigoProducto = txtCodigoProducto.getText();
-        String descripcion = txtDescripcionProducto.getText();
-        double valorUnitario =Double.parseDouble(txtValorProducto.getText());
-        String existencias = txtExistenciasProducto.getText();
 
-        if(datosValidosProducto(nombreProducto, codigoProducto, descripcion, valorUnitario, existencias) == true){
-            listaProductos.add(new Producto(nombreProducto, codigoProducto, descripcion, valorUnitario, existencias));
-            aplicacion.añadirProducto(nombreProducto, codigoProducto, descripcion, valorUnitario, existencias);
-            this.aplicacion.añadirProducto(nombreProducto, codigoProducto, descripcion, valorUnitario, existencias);
-        }
 
-    }
+
+
+
 
     @FXML
     void agregarCliente(ActionEvent event) {
@@ -540,7 +589,6 @@ public class AlmacenController implements Initializable {
         txtTelefono.setPromptText("Telefono del cliente");
         txtDireccion.setPromptText("Direccion del cliente");
         txtCedula.setDisable(false);
-        mnBtnTipoProducto.setDisable(false);
     }
     @FXML
     void nuevoProducto(ActionEvent event){
@@ -599,6 +647,66 @@ public class AlmacenController implements Initializable {
     @FXML
     void selectPeru(ActionEvent event) {
         mnBtnPaisOrigen.setText(itemPeru.getText());
+    }
+
+    @FXML
+    void crearFactura(ActionEvent event) {
+
+    }
+
+    @FXML
+    void nuevaFactura(ActionEvent event) {
+        //settear fechaFactura
+        txtFechaFactura.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))); 
+        //settear Iva
+        txtIva.setText("19");
+        //settear codigo
+        txtCodigoFactura.setText("123456");
+        //habilitar campos
+        txtClienteABuscar.setDisable(false);
+        txtProductoABuscar.setDisable(false);
+        txtCantidadProducto.setDisable(false);
+
+    }
+
+    @FXML
+    void buscarProducto(ActionEvent event) {
+
+
+        if(txtProductoABuscar.getText() != null){
+            /*String cedula = txtClienteABuscar.getText();
+            int pos = almacen.obtenerPosicionCliente(cedula);
+            if(pos != -1){
+                nombreCliente = listaClientes.get(pos).getNombre() + " " + listaClientes.get(pos).getApellido();
+                txtClienteFactura.setText(nombreCliente);
+            }else{
+                mostrarMensaje("Notificación","Error","No se ha encontrado ningún cliente");
+            }
+        }else{
+            mostrarMensaje("Notificación","Error","El campo esta vacio");
+        */
+        }
+        //
+    }
+
+    @FXML
+    void buscarCliente(ActionEvent event) {
+        
+        String nombreCliente;
+
+        if(txtClienteABuscar.getText() != null){
+            String cedula = txtClienteABuscar.getText();
+            int pos = almacen.obtenerPosicionCliente(cedula);
+            if(pos != -1){
+                nombreCliente = listaClientes.get(pos).getNombre() + " " + listaClientes.get(pos).getApellido();
+                txtClienteFactura.setText(nombreCliente);
+            }else{
+                mostrarMensaje("Notificación","Error","No se ha encontrado ningún cliente");
+            }
+        }else{
+            mostrarMensaje("Notificación","Error","El campo esta vacio");
+        }
+
     }
 
 }
