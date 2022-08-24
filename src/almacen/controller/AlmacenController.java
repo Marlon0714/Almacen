@@ -6,11 +6,8 @@ package almacen.controller;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.ResourceBundle;
-
 import javax.management.Notification;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -42,6 +39,9 @@ public class AlmacenController implements Initializable {
     private Aplicacion aplicacion;
     private Almacen almacen;
     ObservableList<Cliente> listaClientes = FXCollections.observableArrayList();
+    ObservableList<Venta> listaVentas = FXCollections.observableArrayList();
+    ObservableList<Venta> listaDetallesFactura = FXCollections.observableArrayList();
+    ObservableList<Factura> listaFacturas = FXCollections.observableArrayList();
     ObservableList<Producto> listaProductos = FXCollections.observableArrayList();
 
     /**
@@ -56,6 +56,18 @@ public class AlmacenController implements Initializable {
         this.columnTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
         this.columnId.setCellValueFactory(new PropertyValueFactory<>("cedula"));
         this.columnDireccion.setCellValueFactory(new PropertyValueFactory<>("direccion"));
+
+        this.columnCodigoFactura.setCellValueFactory(new PropertyValueFactory<>("codigoFactura"));
+        this.columnFechaFactura.setCellValueFactory(new PropertyValueFactory<>("fechaFactura"));
+        this.columnClienteFactura.setCellValueFactory(new PropertyValueFactory<>("cliente"));
+        this.columnIvaFactura.setCellValueFactory(new PropertyValueFactory<>("iva"));
+        this.columnTotalFactura.setCellValueFactory(new PropertyValueFactory<>("total"));
+
+        this.columnCodigoVenta.setCellValueFactory(new PropertyValueFactory<>("codigo"));
+        this.columnNombreVenta.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        this.columnCantidadVenta.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
+        this.columnValorUVenta.setCellValueFactory(new PropertyValueFactory<>("valorU"));
+        this.columnSubTotalVenta.setCellValueFactory(new PropertyValueFactory<>("subTotal"));
 
         this.columnNombreProducto.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         this.columnCodigo.setCellValueFactory(new PropertyValueFactory<>("CodigoProducto"));
@@ -75,13 +87,25 @@ public class AlmacenController implements Initializable {
 
 
 
+
         this.tableViewClientes.setItems(listaClientes);
+        this.tableViewFacturas.setItems(listaFacturas);
+        this.tableViewDetalles.setItems(listaVentas);
+        this.tableViewDetallesFactura.setItems(listaDetallesFactura);
+
         tableViewClientes.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
         if(newSelection != null){
             clienteSeleccion = newSelection;
             mostrarInformacion();
             }
         });
+
+        tableViewFacturas.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if(newSelection != null){
+                //facturaSeleccion = newSelection;
+                //mostarInformacionFactura();
+                }
+            });
 
         txtClienteABuscar.setDisable(true);
         txtProductoABuscar.setDisable(true);
@@ -163,6 +187,21 @@ public class AlmacenController implements Initializable {
     private Button btnNuevoProducto;
 
     @FXML
+    private TableColumn<Factura, String> columnClienteFactura;
+
+    @FXML
+    private TableColumn<Factura, String> columnCodigoFactura;
+
+    @FXML
+    private TableColumn<Factura, String> columnFechaFactura;
+
+    @FXML
+    private TableColumn<Factura, String> columnIvaFactura;
+    
+    @FXML
+    private TableColumn<Factura, String> columnTotalFactura;
+
+    @FXML
     private TableColumn<Cliente, String> columnNombre;
 
     @FXML
@@ -179,9 +218,6 @@ public class AlmacenController implements Initializable {
 
     @FXML
     private TableColumn<Venta, String> columnCodigoVenta;
-
-    @FXML
-    private TableColumn<Venta, String> columnDescripcionVenta;
 
     @FXML
     private TableColumn<Cliente, String> columnApellido;
@@ -343,11 +379,6 @@ public class AlmacenController implements Initializable {
 
     @FXML
     private MenuButton mnBtnTipoProducto;
-
-
-
-
-
 
 
     @FXML
@@ -686,21 +717,26 @@ public class AlmacenController implements Initializable {
     @FXML
     void buscarProducto(ActionEvent event) {
 
+        
 
         if(txtProductoABuscar.getText() != null){
-            /*String cedula = txtClienteABuscar.getText();
-            int pos = almacen.obtenerPosicionCliente(cedula);
+
+            String codigo = txtProductoABuscar.getText();
+            int pos = almacen.obtenerPosicionProducto(codigo);
             if(pos != -1){
-                nombreCliente = listaClientes.get(pos).getNombre() + " " + listaClientes.get(pos).getApellido();
-                txtClienteFactura.setText(nombreCliente);
+                
+                //Venta venta = new Venta(listaProductos.get(pos), txtCantidadProducto.getText());
+
+               //listaVentas.add(venta);
+                tableViewDetalles.refresh();
             }else{
-                mostrarMensaje("Notificación","Error","No se ha encontrado ningún cliente");
+                mostrarMensaje("Notificación","Error","No se ha encontrado ningún Producto");
             }
         }else{
             mostrarMensaje("Notificación","Error","El campo esta vacio");
-        */
+        
         }
-        //
+        
     }
 
     @FXML

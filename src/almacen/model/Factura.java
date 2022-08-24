@@ -5,18 +5,17 @@
 package almacen.model;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Factura {
     
     private int codigoFactura;
-    private Date fechaFactura;
-    private Cliente cliente;
+    private String fechaFactura;
+    private String cliente;
     private float iva;
     private double total;
     private ArrayList<Venta> detallesFactura = new ArrayList<>();
 
-    public Factura(int codigoFactura, Date fechaFactura, Cliente cliente, float iva, ArrayList<Venta> detallesFactura) {
+    public Factura(int codigoFactura, String fechaFactura, String cliente, float iva, ArrayList<Venta> detallesFactura) {
         this.codigoFactura = codigoFactura;
         this.fechaFactura = fechaFactura;
         this.cliente = cliente;
@@ -28,11 +27,11 @@ public class Factura {
         return codigoFactura;
     }
 
-    public Date getFechaFactura() {
+    public String getFechaFactura() {
         return fechaFactura;
     }
 
-    public Cliente getCliente() {
+    public String getCliente() {
         return cliente;
     }
 
@@ -52,11 +51,11 @@ public class Factura {
         this.codigoFactura = codigoFactura;
     }
 
-    public void setFechaFactura(Date fechaFactura) {
+    public void setFechaFactura(String fechaFactura) {
         this.fechaFactura = fechaFactura;
     }
 
-    public void setCliente(Cliente cliente) {
+    public void setCliente(String cliente) {
         this.cliente = cliente;
     }
 
