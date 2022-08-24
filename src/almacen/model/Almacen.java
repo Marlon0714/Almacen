@@ -166,6 +166,9 @@ public class Almacen {
         return flagEliminado;
     }
 
-
+    public void agregarVenta(Producto producto, int cantidadProducto){
+        
+        
+    }
 
 }

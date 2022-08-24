@@ -6,11 +6,8 @@ package almacen.controller;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.ResourceBundle;
-
 import javax.management.Notification;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -602,9 +599,10 @@ public class AlmacenController implements Initializable {
             int pos = almacen.obtenerPosicionProducto(codigo);
             if(pos != -1){
                 
-                //Venta ventana = new Venta(listaProductos.get(pos), txtCantidadProducto.getText());
+                //Venta venta = new Venta(listaProductos.get(pos), txtCantidadProducto.getText());
 
-                //listaVenta.add(venta);
+               //listaVentas.add(venta);
+                tableViewDetalles.refresh();
             }else{
                 mostrarMensaje("Notificación","Error","No se ha encontrado ningún Producto");
             }
@@ -612,7 +610,7 @@ public class AlmacenController implements Initializable {
             mostrarMensaje("Notificación","Error","El campo esta vacio");
         
         }
-        //
+        
     }
 
     @FXML
